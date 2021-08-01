@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hans">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+    <link rel="dns-prefetch" href="//busuanzi.ibruce.info">
+
+
+<!-- comment -->
+
+
+    <link rel="dns-prefetch" href="//disqus.com">
+    <link rel="dns-prefetch" href="//lysmbetter.disqus.com">
+
+
+
+
+
+
+<!-- analytics -->
+
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+    <!-- Busuanzi -->
+    
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" as="script">
+
+
+
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>Android 状态栏高度-屏幕划分-正确获取标题栏高度 | Better</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/img/suka-favicon.ico">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/css/highlight/github.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/css/highlight/github.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Better"><meta name="msapplication-starturl" content="http://lysmbetter.top"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Better"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="Android 状态栏高度-屏幕划分-正确获取标题栏高度 | Better"><meta property="og:site_name" content="Better"><meta property="og:type" content="article"><meta property="og:url" content="http://lysmbetter.top/2017/11/19/Android%20%E7%8A%B6%E6%80%81%E6%A0%8F%E9%AB%98%E5%BA%A6-%E5%B1%8F%E5%B9%95%E5%88%92%E5%88%86-%E6%AD%A3%E7%A1%AE%E8%8E%B7%E5%8F%96%E6%A0%87%E9%A2%98%E6%A0%8F%E9%AB%98%E5%BA%A6/"><meta property="og:locale" content="zh-Hans"><meta name="description" content="需求今天的需求是要获取到状态栏的高度没因为UI是全屏填充到顶部。通过margin来控制是否显示到状态栏下面。在网上看到一个见解：不同的Android设备状态栏的高度不一样。240x320高度是20px,320x480高度是25px，480x800是38px。记得以前有人说是25px，所以是不对的。获取方式是根据Window来获取： 1234567Rect rectangle &amp;#x3D; new  - Better - Better"><meta name="keywords" content="状态栏高度, 导航栏高度, android"><meta property="og:image" content="https://lysmbetter-1252916934.cos.ap-chengdu.myqcloud.com/lysmbetter/EFA6EFAE97E8D2C1FE89A14E6310A710.jpg"><meta property="og:image" content="https://lysmbetter-1252916934.cos.ap-chengdu.myqcloud.com/lysmbetter/FCC43206BCA6C80611699AD0E9407D3D.jpg"><meta property="og:image" content="https://lysmbetter-1252916934.cos.ap-chengdu.myqcloud.com/lysmbetter/0C847D7DB8261326D1FA7FC07CAF0317.jpg"><meta property="og:image" content="https://lysmbetter-1252916934.cos.ap-chengdu.myqcloud.com/lysmbetter/EA4724A343DDAA44398F2D9C23FCB065.jpg"><meta property="og:image" content="https://lysmbetter-1252916934.cos.ap-chengdu.myqcloud.com/lysmbetter/2A35B844FA80680D5A3FFA73F6536BF6.jpg"><meta property="og:image" content="https://lysmbetter-1252916934.cos.ap-chengdu.myqcloud.com/lysmbetter/43AA05F0C1515C3F7228A17486537715.jpg"><meta property="og:image" content="https://lysmbetter-1252916934.cos.ap-chengdu.myqcloud.com/lysmbetter/BCA5DFEC15790A7219899E7592F3447A.jpg"><meta property="og:image" content="https://lysmbetter-1252916934.cos.ap-chengdu.myqcloud.com/lysmbetter/09EC57718E059F2ACBED7D0A55A29DE5.jpg"><meta property="article:published_time" content="2017-11-19T05:13:45.000Z"><meta property="article:modified_time" content="2020-07-18T13:05:05.027Z"><meta property="og:updated_time" content="2020-07-18T13:05:05.027Z"><meta property="article:author" content="Better"><meta property="article:tag" content="状态栏高度, 导航栏高度, android"><meta name="twitter:card" content="summary">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="http://lysmbetter.top/2017/11/19/Android%20%E7%8A%B6%E6%80%81%E6%A0%8F%E9%AB%98%E5%BA%A6-%E5%B1%8F%E5%B9%95%E5%88%92%E5%88%86-%E6%AD%A3%E7%A1%AE%E8%8E%B7%E5%8F%96%E6%A0%87%E9%A2%98%E6%A0%8F%E9%AB%98%E5%BA%A6/">
+
+    <meta name="generator" content="Hexo 4.2.1">
+
+    <!-- ### Analytics ### -->
+    
+
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "http://lysmbetter.top/2017/11/19/Android%20%E7%8A%B6%E6%80%81%E6%A0%8F%E9%AB%98%E5%BA%A6-%E5%B1%8F%E5%B9%95%E5%88%92%E5%88%86-%E6%AD%A3%E7%A1%AE%E8%8E%B7%E5%8F%96%E6%A0%87%E9%A2%98%E6%A0%8F%E9%AB%98%E5%BA%A6/",
+    "@type": "BlogPosting",
+    "logo": "http://lysmbetter.top/img/suka-favicon.ico",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://lysmbetter.top/2017/11/19/Android%20%E7%8A%B6%E6%80%81%E6%A0%8F%E9%AB%98%E5%BA%A6-%E5%B1%8F%E5%B9%95%E5%88%92%E5%88%86-%E6%AD%A3%E7%A1%AE%E8%8E%B7%E5%8F%96%E6%A0%87%E9%A2%98%E6%A0%8F%E9%AB%98%E5%BA%A6/"
+    },
+    "headline": "Android 状态栏高度-屏幕划分-正确获取标题栏高度 | Better",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://lysmbetter.top/img/suka-favicon.ico"
+    },
+    
+    "datePublished": "2017-11-19T05:13:45.000Z",
+    "dateModified": "2020-07-18T13:05:05.027Z",
+    "author": {
+        "@type": "Person",
+        "name": "Better",
+        "image": {
+            "@type": "ImageObject",
+            "url": "http://lysmbetter.top/img/default_avatar.png"
+        },
+        "description": "业精于勤荒于嬉"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Better",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://lysmbetter.top/img/suka-favicon.ico"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "http://lysmbetter.top/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "状态栏高度, 导航栏高度, android",
+    "description": "需求今天的需求是要获取到状态栏的高度没因为UI是全屏填充到顶部。通过margin来控制是否显示到状态栏下面。在网上看到一个见解：不同的Android设备状态栏的高度不一样。240x320高度是20px,320x480高度是25px，480x800是38px。记得以前有人说是25px，所以是不对的。获取方式是根据Window来获取： 1234567Rect rectangle &amp;amp;#x3D; new  - Better - Better"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+</head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/">Better</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                业精于勤荒于嬉
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/" class="navbar-link">Home</a>
+    
+    
+        <a href="/archives/" class="navbar-link">Archives</a>
+    
+    
+        <a href="/search" class="navbar-link">Search</a>
+    
+    
+        <a href="/tags" class="navbar-link">Tags</a>
+    
+        <a href="/about" class="navbar-link">About</a>
+    
+    
+        <div class="dropdown dropdown-right">
+    <a class="navbar-link dropdown-toggle" tabindex="0">Share</a>
+    <ul class="menu share-menu">
+
+        <!-- Share Weibo -->
+        
+
+        <!-- Share Twitter -->
+        
+
+        <!-- Share Facebook -->
+        
+
+        <!-- Share Google+ -->
+        
+
+        <!-- Share LinkedIn -->
+        
+
+        <!-- Share QQ -->
+        
+
+        <!-- Share Telegram -->
+        
+
+        <!-- QRCode -->
+        
+        <li class="menu-item">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPQAAAD0CAAAAACJRFQiAAAEpUlEQVR42u2bS3YbQQwDdf9LJ6ssomiIQjsbNWs2tuT5dLWfKRKAX78WHi+hhRZaaKGF/jLo13C8//zP679uBN5/v8fTdU9reFpHuvafc4QWegn0xz/6Dwt8f8DTNU8Le38vLvLD/egaP54jtNCLoKeC9VTgpo0gG5AK36dzyAY9cggttNC/SKPydM1U7J42tmlohBZa6HPoqRCla8hAM31PiqnQQgvNGvV2cVMzkcQHKjSk4ePHU5bQQn85dCo03/L1v6qhQgv9pdDR9AINQ1ugJnGBnEuFiWPXUmihvxj65AHT92nzWoF/EgSnIlZ1ZEILfRk0NcaIAEhF/8ncoxtOBUyhhd4GnYoNFeqSENGGc44akKmYCi30EmhaHJpi0y6yNRkm015ooTdDT8UsDSI0uEqHjyQuNOJDFAaFFvpi6Mn0TkWNBOjwQFCKC2ndjwOH0EJfDJ0+5NuA21TQUpGkz0k/E1ro7dDUQKMFJTU+xCCkAZ4kZgot9EboVLAaWBJ4awR/KmykQIHQQm+BToZca6ydiALTRiXR8XjKElroS6FJQKUJxqXmghj7BKotakILvQ26aezpEEHNd1IYaeAGd2RCC30xdCO2UaOdnEuMwpMQ0GPRFVroBdCp8WiEeyL8pcalMfDacI/QQm+Dph/+r+Ggwh9pjMjAQQwHoYXeBI2G78LUa5uSqQFqi2K8XmihF0FPA0hrntMgDQnUpmeTcJDQQm+DJuGYtMBTg64N7KQ1VAae0EJfDD2Z69RoJw0JDcZOECQMgF1LoYW+DJoWEBLEIWb8NLBQsa/ZOKGFFrobNEhjcBKwTZua7vdxHUILvQSaFIYk/ieRvhksmgGGmPFCC70RmhhzVKgjQmAr9CWDoB44hBb6UuhGrEtDRGoOWqGf3h+HCYQWejF0EteJwECaHRKi+UlhFVrobdBJoCchGSL0kYYkbSAtqo9rFFroBdBJ2KNB2KnhT4E4Yiy0pkOs3kILfTF0MtLpYDINB8RcJ0Y/bW6wiCC00BdDEwNvAk8CYWpY0tBDB45o4Akt9AJoKvw1gbt2I5PQP60HCZlCC70IevrgJ+G6aaggRYcMJtOwgp4ttNCLoMlCaSEhAl5rJiSDkGy60EJvg6ZGWGO+p4JHCyMO0wybJrTQG6CnJoEId1M4h5j1TRi+ESRRyF1ooS+Ebkw3GnhvTEHSGE3CAjEZhBZ6G3RroP1EzGuC69QUxEKE0EIvgCbGWgqykUJGxMdG/J/WHUPuQgt9MXQKsxFxjjT/NMBzYjTQQiq00JugT4OvTbiGGnipcNFfEu7IhBb6Mmj0wQ6DL21w7jQQS4trTPYLLfRl0ESQiyI6GBzoP7u0Bh4N7gkt9HZoIixMBY4E05uhhha9scgKLfQCaDJQpIZleihZcArrnIQGhBZ6MzRt7JviksQFIkwQA4GKjkILvQ26LTgpFHcqMjbgaRiJBp7QQi+EpmEcMmTQ4B19PwVwkIEntNALoWMjD4oeDcy0xkFlFAgt9CLoZHanoZ0GYEgghwwVJCgktNBbockQkF6ThoYWv0bcSAYgTiIILfQl0JsOoYUWWmihhf6S4zdpLzXgWsUR/gAAAABJRU5ErkJggg==" alr="QRCode">
+        </li>
+        
+
+    </ul>
+</div>
+    
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">Android 状态栏高度-屏幕划分-正确获取标题栏高度</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/img/default_avatar.png" src="/img/suka-lazyload.gif" alt="Better's Avatar">
+        <span>2017-11-19</span>
+        
+            <span class="suka-devide-dot"></span>
+            <a class="category-link" href="/categories/Android/">Android</a>
+        
+        
+            <!-- Busuanzi Post Views -->
+<span id="busuanzi_container_page_pv" hidden>
+    <span class="suka-devide-dot"></span>
+    <span></span>
+    <span id="busuanzi_value_page_pv"></span>
+    <span>Views</span>
+</span>
+        
+        
+    </p>
+    <div class="post-header-info-right">
+        
+            <div class="dropdown dropdown-right">
+<a class="dropdown-toggle" tabindex="0">Share the post</a>
+<ul class="menu share-menu">
+    <!-- Share Weibo -->
+    
+
+    <!-- Share Twitter -->
+    
+
+    <!-- Share Facebook -->
+    
+
+    <!-- Share Google+ -->
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+
+    <!-- QRCode -->
+    
+    <li class="menu-item">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPQAAAD0CAAAAACJRFQiAAAEpUlEQVR42u2bS3YbQQwDdf9LJ6ssomiIQjsbNWs2tuT5dLWfKRKAX78WHi+hhRZaaKGF/jLo13C8//zP679uBN5/v8fTdU9reFpHuvafc4QWegn0xz/6Dwt8f8DTNU8Le38vLvLD/egaP54jtNCLoKeC9VTgpo0gG5AK36dzyAY9cggttNC/SKPydM1U7J42tmlohBZa6HPoqRCla8hAM31PiqnQQgvNGvV2cVMzkcQHKjSk4ePHU5bQQn85dCo03/L1v6qhQgv9pdDR9AINQ1ugJnGBnEuFiWPXUmihvxj65AHT92nzWoF/EgSnIlZ1ZEILfRk0NcaIAEhF/8ncoxtOBUyhhd4GnYoNFeqSENGGc44akKmYCi30EmhaHJpi0y6yNRkm015ooTdDT8UsDSI0uEqHjyQuNOJDFAaFFvpi6Mn0TkWNBOjwQFCKC2ndjwOH0EJfDJ0+5NuA21TQUpGkz0k/E1ro7dDUQKMFJTU+xCCkAZ4kZgot9EboVLAaWBJ4awR/KmykQIHQQm+BToZca6ydiALTRiXR8XjKElroS6FJQKUJxqXmghj7BKotakILvQ26aezpEEHNd1IYaeAGd2RCC30xdCO2UaOdnEuMwpMQ0GPRFVroBdCp8WiEeyL8pcalMfDacI/QQm+Dph/+r+Ggwh9pjMjAQQwHoYXeBI2G78LUa5uSqQFqi2K8XmihF0FPA0hrntMgDQnUpmeTcJDQQm+DJuGYtMBTg64N7KQ1VAae0EJfDD2Z69RoJw0JDcZOECQMgF1LoYW+DJoWEBLEIWb8NLBQsa/ZOKGFFrobNEhjcBKwTZua7vdxHUILvQSaFIYk/ieRvhksmgGGmPFCC70RmhhzVKgjQmAr9CWDoB44hBb6UuhGrEtDRGoOWqGf3h+HCYQWejF0EteJwECaHRKi+UlhFVrobdBJoCchGSL0kYYkbSAtqo9rFFroBdBJ2KNB2KnhT4E4Yiy0pkOs3kILfTF0MtLpYDINB8RcJ0Y/bW6wiCC00BdDEwNvAk8CYWpY0tBDB45o4Akt9AJoKvw1gbt2I5PQP60HCZlCC70IevrgJ+G6aaggRYcMJtOwgp4ttNCLoMlCaSEhAl5rJiSDkGy60EJvg6ZGWGO+p4JHCyMO0wybJrTQG6CnJoEId1M4h5j1TRi+ESRRyF1ooS+Ebkw3GnhvTEHSGE3CAjEZhBZ6G3RroP1EzGuC69QUxEKE0EIvgCbGWgqykUJGxMdG/J/WHUPuQgt9MXQKsxFxjjT/NMBzYjTQQiq00JugT4OvTbiGGnipcNFfEu7IhBb6Mmj0wQ6DL21w7jQQS4trTPYLLfRl0ESQiyI6GBzoP7u0Bh4N7gkt9HZoIixMBY4E05uhhha9scgKLfQCaDJQpIZleihZcArrnIQGhBZ6MzRt7JviksQFIkwQA4GKjkILvQ26LTgpFHcqMjbgaRiJBp7QQi+EpmEcMmTQ4B19PwVwkIEntNALoWMjD4oeDcy0xkFlFAgt9CLoZHanoZ0GYEgghwwVJCgktNBbockQkF6ThoYWv0bcSAYgTiIILfQl0JsOoYUWWmihhf6S4zdpLzXgWsUR/gAAAABJRU5ErkJggg==" alt="QRCode">
+    </li>
+    
+
+</ul>
+</div>
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                        
+                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#需求"><span class="post-toc-number">1.</span> <span class="post-toc-text">需求</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#联系之屏幕的划分"><span class="post-toc-number">2.</span> <span class="post-toc-text">联系之屏幕的划分</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#获取屏幕的宽、高"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">获取屏幕的宽、高</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#状态栏"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">状态栏</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#View布局绘制区域即Content"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">View布局绘制区域即Content</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#标题栏"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">标题栏</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#应用内容区域-gt-标题栏-View布局绘制区域"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">应用内容区域&#x3D;&gt;标题栏+View布局绘制区域</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#导航栏"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">导航栏</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#结果"><span class="post-toc-number">2.7.</span> <span class="post-toc-text">结果</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考"><span class="post-toc-number">3.</span> <span class="post-toc-text">参考</span></a></li></ol></div>
+                        
+                    
+                    <article id="post-content">
+                        <h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><p>今天的需求是要获取到状态栏的高度没因为UI是全屏填充到顶部。通过margin来控制是否显示到状态栏下面。<br>在网上看到一个见解：<br>不同的Android设备状态栏的高度不一样。240x320高度是20px,320x480高度是25px，480x800是38px。记得以前有人说是25px，所以是不对的。获取方式是根据Window来获取：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Rect rectangle &#x3D; new Rect();</span><br><span class="line">Window window &#x3D; getWindow();</span><br><span class="line">window.getDecorView().getWindowVisibleDisplayFrame(rectangle);</span><br><span class="line">int statusBarHeight &#x3D; rectangle.top;</span><br><span class="line">int contentViewTop &#x3D; </span><br><span class="line">    window.findViewById(Window.ID_ANDROID_CONTENT).getTop();</span><br><span class="line">int titleBarHeight&#x3D; contentViewTop - statusBarHeight;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://stackoverflow.com/questions/3407256/height-of-status-bar-in-android" target="_blank" rel="noopener">height-of-status-bar-in-android</a></p>
+<p>将这块整理一下。<br><code>getWindowVisibleDisplayFrame()</code>从方法的描述老看：<strong>获取窗口可视区域</strong>，方法需要IPC的支持，所以不应该用在关键处的代码（critical code），比如draw方法中。<em>而且需要View已经attach到Window的时候才会有值。</em></p>
+<blockquote>
+<p>由于getWindowVisibleDisplayFrame()方法是View类下的一个方法，所以只能通过View对象来调用。一个窗口中通常都会有多个View，getWindowVisibleDisplayFrame()方法的返回结果和该窗口中选取的View并没有关系。在某个时刻，使用当前窗口中的任意View执行getWindowVisibleDisplayFrame()返回的结果都是一样的</p>
+<blockquote>
+<p>getWindowVisibleDisplayFrame()方法返回的是窗口的可视区域大小，并非某个View的可视区域大小，所以用窗口中的任意View来执行都是没有差别的。</p>
+</blockquote>
+</blockquote>
+<h1 id="联系之屏幕的划分"><a href="#联系之屏幕的划分" class="headerlink" title="联系之屏幕的划分"></a>联系之屏幕的划分</h1><p>手机展示的界面从上到下依次是</p>
+<ol>
+<li>状态栏（包含通知，系统时间），</li>
+<li>然后是应用的标题栏，</li>
+<li>应用的View布局栏，</li>
+<li>以及底部的导航栏。</li>
+</ol>
+<p>有的手机有实体按钮所有没有底部的导航栏。<br><img src="https://lysmbetter-1252916934.cos.ap-chengdu.myqcloud.com/lysmbetter/EFA6EFAE97E8D2C1FE89A14E6310A710.jpg" alt="IMAGE"></p>
+<h2 id="获取屏幕的宽、高"><a href="#获取屏幕的宽、高" class="headerlink" title="获取屏幕的宽、高"></a>获取屏幕的宽、高</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">DisplayMetrics metrics &#x3D; new DisplayMetrics();</span><br><span class="line">getWindowManager().getDefaultDisplay().getMetrics(metrics);</span><br><span class="line">int widthPixels &#x3D; metrics.widthPixels;</span><br><span class="line">int heightPixels &#x3D; metrics.heightPixels;</span><br><span class="line">&#x2F;&#x2F;获取包含导航栏一起的高度</span><br><span class="line">((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRealMetrics(mDisplayMetrics);</span><br></pre></td></tr></table></figure>
+
+<h2 id="状态栏"><a href="#状态栏" class="headerlink" title="状态栏"></a>状态栏</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Rect rect&#x3D; new Rect();</span><br><span class="line">getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);</span><br><span class="line">int statusBarHeight &#x3D; rectangle.top;</span><br><span class="line">&#x2F;&#x2F;或者</span><br><span class="line">Resources resources &#x3D; mActivity.getResources();</span><br><span class="line">int resourceId &#x3D; resources.getIdentifier(&quot;status_bar_height&quot;, &quot;dimen&quot;,&quot;android&quot;);</span><br><span class="line">int height &#x3D; resources.getDimensionPixelSize(resourceId);</span><br></pre></td></tr></table></figure>
+
+<h2 id="View布局绘制区域即Content"><a href="#View布局绘制区域即Content" class="headerlink" title="View布局绘制区域即Content"></a>View布局绘制区域即Content</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Rect rect &#x3D; new Rect(); </span><br><span class="line">getWindow().findViewById(Window.ID_ANDROID_CONTENT)     </span><br><span class="line">         .getDrawingRect(rect);</span><br><span class="line">int width &#x3D; rect.width();</span><br><span class="line">int height &#x3D; rect.height();</span><br></pre></td></tr></table></figure>
+
+<h2 id="标题栏"><a href="#标题栏" class="headerlink" title="标题栏"></a>标题栏</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int contentViewTop &#x3D; </span><br><span class="line">    window.findViewById(Window.ID_ANDROID_CONTENT).getTop();</span><br><span class="line">int titleBarHeight&#x3D; contentViewTop - statusBarHeight;</span><br></pre></td></tr></table></figure>
+
+<h2 id="应用内容区域-gt-标题栏-View布局绘制区域"><a href="#应用内容区域-gt-标题栏-View布局绘制区域" class="headerlink" title="应用内容区域=&gt;标题栏+View布局绘制区域"></a>应用内容区域=&gt;标题栏+View布局绘制区域</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Rect rect &#x3D; new Rect();     </span><br><span class="line">getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);            </span><br><span class="line">int width &#x3D; rect.width();</span><br><span class="line">int height &#x3D; rect.height();</span><br></pre></td></tr></table></figure>
+
+<h2 id="导航栏"><a href="#导航栏" class="headerlink" title="导航栏"></a>导航栏</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Resources resources &#x3D; getResources();  </span><br><span class="line">int resourceId &#x3D; resources.getIdentifier(&quot;navigation_bar_height&quot;,&quot;dimen&quot;, &quot;android&quot;);  </span><br><span class="line">int height &#x3D; resources.getDimensionPixelSize(resourceId);</span><br></pre></td></tr></table></figure>
+
+<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p>一个Activity是附着在一个Window上的。Window中包含一个顶级视图DecorView，<br>DecorView中只有一个线性布局的child叫mContentRoot。mContentRoot包含mContentparent、标题栏。而mContentParent就是setContentView所加载的布局的容器，资源id是content。</p>
+<ul>
+<li><code>getDecorView()</code> <strong>是不包含状态栏的。所以他的区域<code>rect.top</code>就是状态栏高度。</strong></li>
+<li><code>getWindow().findViewById(Window.ID_ANDROID_CONTENT).getDrawingRect(rect)</code>就是获取的内容区域，所以<code>rect.top</code>获取的就是状态栏的标题栏的高度。</li>
+</ul>
+<p>所以屏幕的高度=状态栏高度+DecorView高度+导航栏的高度<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;=状态栏高度+标题栏高度+content高度+导航栏高度</p>
+<p>但是结果并不是这样：<br><img src="https://lysmbetter-1252916934.cos.ap-chengdu.myqcloud.com/lysmbetter/FCC43206BCA6C80611699AD0E9407D3D.jpg" alt="IMAGE"><br>(Px_XL_1440x2560)</p>
+<p>标题栏和content的高度与decorView的高度之间差了一个状态栏的高度。奇怪？</p>
+<p>状态栏和导航栏肯定是对的，因为直接从资源里面取出来的，decorView的高度是直接获取的没有问题。问题就出在标题栏高度、content高度上。</p>
+<p>手动将标题栏和content高度打印出来：<br><img src="https://lysmbetter-1252916934.cos.ap-chengdu.myqcloud.com/lysmbetter/0C847D7DB8261326D1FA7FC07CAF0317.jpg" alt="IMAGE"><br>以及content的top，windowFrame以及DrawingRect打印出来：<br><img src="https://lysmbetter-1252916934.cos.ap-chengdu.myqcloud.com/lysmbetter/EA4724A343DDAA44398F2D9C23FCB065.jpg" alt="IMAGE"><br>日志：<br><img src="https://lysmbetter-1252916934.cos.ap-chengdu.myqcloud.com/lysmbetter/2A35B844FA80680D5A3FFA73F6536BF6.jpg" alt="IMAGE"></p>
+<p>发现window的高度是2392，content的<code>bottom-top</code>等于2112，获取到的高度也是2112。所以content的高度是对的。哪问题就出在title的高度了，两个的差值是196。<br>刚刚求标题栏高度是<code>contentViewTop-statusBarHeight</code>。所以问题就出在这，因为：<br><img src="https://lysmbetter-1252916934.cos.ap-chengdu.myqcloud.com/lysmbetter/43AA05F0C1515C3F7228A17486537715.jpg" alt="IMAGE"></p>
+<p><code>contentViewTop</code>就是content在父容器DecorView的坐标位置，就是标题栏的高度。<br>所以标题栏高度：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int contentViewTop &#x3D; </span><br><span class="line">    window.findViewById(Window.ID_ANDROID_CONTENT).getTop();</span><br><span class="line">int titleBarHeight&#x3D;contentViewTop;</span><br></pre></td></tr></table></figure>
+<p><img src="https://lysmbetter-1252916934.cos.ap-chengdu.myqcloud.com/lysmbetter/BCA5DFEC15790A7219899E7592F3447A.jpg" alt="IMAGE"><br>noActionBar:<br><img src="https://lysmbetter-1252916934.cos.ap-chengdu.myqcloud.com/lysmbetter/09EC57718E059F2ACBED7D0A55A29DE5.jpg" alt="IMAGE"></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://blog.csdn.net/ccpat/article/details/55224475" target="_blank" rel="noopener">Android获取窗口可视区域大小: getWindowVisibleDisplayFrame()</a><br><a href="http://www.cnblogs.com/x-bing/p/6444522.html" target="_blank" rel="noopener">android 屏幕划分</a><br><a href="http://www.jb51.net/article/77546.htm" target="_blank" rel="noopener">深入浅析Android坐标系统</a></p>
+
+                    </article>
+                    
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">This article was last updated on <span id="date-expire-num"></span> days ago, and the information described in the article may have changed.</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2020-07-18");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">Published at&nbsp;<time datetime="2017-11-19T05:13:45.000Z" itemprop="datePublished">2017-11-19</time>
+
+    , Updated at&nbsp;<time datetime="2020-07-18T13:05:05.027Z" itemprop="dateModified">2020-07-18</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+<span class="post-categories-list mt-2">
+
+<a class="post-categories-list-item" href='/categories/Android/'>Android</a>
+
+</span>
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/tags/%E7%8A%B6%E6%80%81%E6%A0%8F%E9%AB%98%E5%BA%A6/" rel="tag">#&nbsp;状态栏高度</a>
+
+<a class="post-tags-list-item" href="/tags/%E5%AF%BC%E8%88%AA%E6%A0%8F%E9%AB%98%E5%BA%A6/" rel="tag">#&nbsp;导航栏高度</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/2017/12/12/Gradle%20%E4%BE%9D%E8%B5%96%E7%94%B3%E6%98%8E%E6%96%B9%E5%BC%8F/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">Gradle 依赖申明方式</div>
+            </a>
+        </li>
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/2017/11/12/Android-O%E5%AE%89%E8%A3%85%E6%9C%AA%E7%9F%A5%E5%BA%94%E7%94%A8/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">Android-O安装未知应用</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://lysmbetter.top/2017/11/19/Android%20%E7%8A%B6%E6%80%81%E6%A0%8F%E9%AB%98%E5%BA%A6-%E5%B1%8F%E5%B9%95%E5%88%92%E5%88%86-%E6%AD%A3%E7%A1%AE%E8%8E%B7%E5%8F%96%E6%A0%87%E9%A2%98%E6%A0%8F%E9%AB%98%E5%BA%A6/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://lysmbetter.top/2017/11/19/Android%20%E7%8A%B6%E6%80%81%E6%A0%8F%E9%AB%98%E5%BA%A6-%E5%B1%8F%E5%B9%95%E5%88%92%E5%88%86-%E6%AD%A3%E7%A1%AE%E8%8E%B7%E5%8F%96%E6%A0%87%E9%A2%98%E6%A0%8F%E9%AB%98%E5%BA%A6/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+<script id="disqus-thread-script">
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document;
+        var s = d.createElement('script');
+        s.src = '//lysmbetter.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', + new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="http://lysmbetter.top">Better</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+    <!-- Busuanzi User Views -->
+    <span id="busuanzi_container_site_uv" hidden>
+        <span></span>
+        <span id="busuanzi_value_site_uv"></span>
+        <span>Viewers</span>
+        
+            <span>|</span>
+        
+    </span>
+
+
+
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+document.getElementById('copyright-year').textContent = new Date().getFullYear();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/lib/vanilla-lazyload/lazyload.min.js" async></script>
+    <script src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+<!-- Offset -->
+
+
+
+
+<!-- Comment -->
+
+    
+        <script id="dsq-count-scr" src="https://lysmbetter.disqus.com/count.js" async></script>
+
+    
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>

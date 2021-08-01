@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hans">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+    <link rel="dns-prefetch" href="//busuanzi.ibruce.info">
+
+
+<!-- comment -->
+
+
+    <link rel="dns-prefetch" href="//disqus.com">
+    <link rel="dns-prefetch" href="//lysmbetter.disqus.com">
+
+
+
+
+
+
+<!-- analytics -->
+
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+    <!-- Busuanzi -->
+    
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" as="script">
+
+
+
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>Java-网络 | Better</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/img/suka-favicon.ico">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/css/highlight/github.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/css/highlight/github.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Better"><meta name="msapplication-starturl" content="http://lysmbetter.top"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Better"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="Java-网络 | Better"><meta property="og:site_name" content="Better"><meta property="og:type" content="article"><meta property="og:url" content="http://lysmbetter.top/2017/04/10/java-%E7%BD%91%E7%BB%9C/"><meta property="og:locale" content="zh-Hans"><meta name="description" content="网络编程指的是让所写的代码在几个设备之间运行，为的是将这些设备通过网络彼此相连。在J2SE下的java.net包中的API，提供了一些低级别的类和接口，帮助你专注于解决手上的问题。java,net 包提供了两种网络协议：  TCP 传输控制协议，应许你在两个设备之间建立连接。TCP协议广泛使用与网络协议中，被称为TCP&#x2F;IP. UDP 用户数据协议，一种无连接协议，允许数据包在应用程序之间传输。本 - Better - Better"><meta name="keywords" content="Socket, android"><meta property="article:published_time" content="2017-04-10T11:35:43.000Z"><meta property="article:modified_time" content="2020-07-18T13:05:05.099Z"><meta property="og:updated_time" content="2020-07-18T13:05:05.099Z"><meta property="article:author" content="Better"><meta property="article:tag" content="Socket, android"><meta name="twitter:card" content="summary">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="http://lysmbetter.top/2017/04/10/java-%E7%BD%91%E7%BB%9C/">
+
+    <meta name="generator" content="Hexo 4.2.1">
+
+    <!-- ### Analytics ### -->
+    
+
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "http://lysmbetter.top/2017/04/10/java-%E7%BD%91%E7%BB%9C/",
+    "@type": "BlogPosting",
+    "logo": "http://lysmbetter.top/img/suka-favicon.ico",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://lysmbetter.top/2017/04/10/java-%E7%BD%91%E7%BB%9C/"
+    },
+    "headline": "Java-网络 | Better",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://lysmbetter.top/img/suka-favicon.ico"
+    },
+    
+    "datePublished": "2017-04-10T11:35:43.000Z",
+    "dateModified": "2020-07-18T13:05:05.099Z",
+    "author": {
+        "@type": "Person",
+        "name": "Better",
+        "image": {
+            "@type": "ImageObject",
+            "url": "http://lysmbetter.top/img/default_avatar.png"
+        },
+        "description": "业精于勤荒于嬉"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Better",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://lysmbetter.top/img/suka-favicon.ico"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "http://lysmbetter.top/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "Socket, android",
+    "description": "网络编程指的是让所写的代码在几个设备之间运行，为的是将这些设备通过网络彼此相连。在J2SE下的java.net包中的API，提供了一些低级别的类和接口，帮助你专注于解决手上的问题。java,net 包提供了两种网络协议：  TCP 传输控制协议，应许你在两个设备之间建立连接。TCP协议广泛使用与网络协议中，被称为TCP/IP. UDP 用户数据协议，一种无连接协议，允许数据包在应用程序之间传输。本 - Better - Better"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+</head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/">Better</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                业精于勤荒于嬉
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/" class="navbar-link">Home</a>
+    
+    
+        <a href="/archives/" class="navbar-link">Archives</a>
+    
+    
+        <a href="/search" class="navbar-link">Search</a>
+    
+    
+        <a href="/tags" class="navbar-link">Tags</a>
+    
+        <a href="/about" class="navbar-link">About</a>
+    
+    
+        <div class="dropdown dropdown-right">
+    <a class="navbar-link dropdown-toggle" tabindex="0">Share</a>
+    <ul class="menu share-menu">
+
+        <!-- Share Weibo -->
+        
+
+        <!-- Share Twitter -->
+        
+
+        <!-- Share Facebook -->
+        
+
+        <!-- Share Google+ -->
+        
+
+        <!-- Share LinkedIn -->
+        
+
+        <!-- Share QQ -->
+        
+
+        <!-- Share Telegram -->
+        
+
+        <!-- QRCode -->
+        
+        <li class="menu-item">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAACUCAAAAABQV18IAAAB2UlEQVR42u3cy66DMAyEYd7/pdttVcUzY2BBzJ8NUssJH0e5OlaPzwPLAQoUKFAL1CHK6p6ywp/vXR3lc0CNQVUPqR76f08FUPWtPgc1C/Xf8JLr6v70BZZ/B+o1KPXwCrG6BxSoatBTE6v6HNS7UKqBuslZfa9eDtRclGu4d11v282AejTKBh1CbNKob4u6gHo0yk2kakDsbjhU/aDmoNwG0i3SXOBsOfG6RR6orVHq5qriFKZwy38CqFGo7oPUhiE9KLDBfVBboqpJVVXkghzpQRKouah00a8CXsmBpQ2UgBqBcpsBFexyHaCNBDUGdcuh9GJAVJsRu0MGtTVKNWAHUQGRFAlqHkoFItT1yuG4DXCA2hrV2ZSqjYTqPMliEtQMVBJ07SRTqGBbPCGD2hqVLNQ+J0s3MRrUHJQb7NyBonsRd1AAah7qyiSaHhIkDR7ULFQ3EaeTbJEuJEHNQ3UWdMkAmxwsRckSoLZCdRq4C866Tapr7KBmoJIEh6sJEUngDdQslFu0uY7gwC7oD2om6kxQLJl0W50I1KtQNnnmZKJ8K3sR1BhUkvTQ6RjlQAxqFEpNtPIw+uj/gEg7AQfUdqjOhJoGXlX95QuBGoF6UgEFChSon/IFOdOQL+lVYnYAAAAASUVORK5CYII=" alr="QRCode">
+        </li>
+        
+
+    </ul>
+</div>
+    
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">Java-网络</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/img/default_avatar.png" src="/img/suka-lazyload.gif" alt="Better's Avatar">
+        <span>2017-04-10</span>
+        
+            <span class="suka-devide-dot"></span>
+            <a class="category-link" href="/categories/Java%E8%AF%91%E6%96%87/">Java译文</a>
+        
+        
+            <!-- Busuanzi Post Views -->
+<span id="busuanzi_container_page_pv" hidden>
+    <span class="suka-devide-dot"></span>
+    <span></span>
+    <span id="busuanzi_value_page_pv"></span>
+    <span>Views</span>
+</span>
+        
+        
+    </p>
+    <div class="post-header-info-right">
+        
+            <div class="dropdown dropdown-right">
+<a class="dropdown-toggle" tabindex="0">Share the post</a>
+<ul class="menu share-menu">
+    <!-- Share Weibo -->
+    
+
+    <!-- Share Twitter -->
+    
+
+    <!-- Share Facebook -->
+    
+
+    <!-- Share Google+ -->
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+
+    <!-- QRCode -->
+    
+    <li class="menu-item">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAACUCAAAAABQV18IAAAB2UlEQVR42u3cy66DMAyEYd7/pdttVcUzY2BBzJ8NUssJH0e5OlaPzwPLAQoUKFAL1CHK6p6ywp/vXR3lc0CNQVUPqR76f08FUPWtPgc1C/Xf8JLr6v70BZZ/B+o1KPXwCrG6BxSoatBTE6v6HNS7UKqBuslZfa9eDtRclGu4d11v282AejTKBh1CbNKob4u6gHo0yk2kakDsbjhU/aDmoNwG0i3SXOBsOfG6RR6orVHq5qriFKZwy38CqFGo7oPUhiE9KLDBfVBboqpJVVXkghzpQRKouah00a8CXsmBpQ2UgBqBcpsBFexyHaCNBDUGdcuh9GJAVJsRu0MGtTVKNWAHUQGRFAlqHkoFItT1yuG4DXCA2hrV2ZSqjYTqPMliEtQMVBJ07SRTqGBbPCGD2hqVLNQ+J0s3MRrUHJQb7NyBonsRd1AAah7qyiSaHhIkDR7ULFQ3EaeTbJEuJEHNQ3UWdMkAmxwsRckSoLZCdRq4C866Tapr7KBmoJIEh6sJEUngDdQslFu0uY7gwC7oD2om6kxQLJl0W50I1KtQNnnmZKJ8K3sR1BhUkvTQ6RjlQAxqFEpNtPIw+uj/gEg7AQfUdqjOhJoGXlX95QuBGoF6UgEFChSon/IFOdOQL+lVYnYAAAAASUVORK5CYII=" alt="QRCode">
+    </li>
+    
+
+</ul>
+</div>
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                        
+                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Socket-Programming"><span class="post-toc-number">1.</span> <span class="post-toc-text">Socket Programming</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ServerSocket-类方法"><span class="post-toc-number">2.</span> <span class="post-toc-text">ServerSocket 类方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Socket-类方法"><span class="post-toc-number">3.</span> <span class="post-toc-text">Socket 类方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Socket编程例子"><span class="post-toc-number">4.</span> <span class="post-toc-text">Socket编程例子</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Socker-服务端例子"><span class="post-toc-number">5.</span> <span class="post-toc-text">Socker 服务端例子</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#输出"><span class="post-toc-number">6.</span> <span class="post-toc-text">输出</span></a></li></ol></div>
+                        
+                    
+                    <article id="post-content">
+                        <p>网络编程指的是让所写的代码在几个设备之间运行，为的是将这些设备通过网络彼此相连。<br>在J2SE下的<code>java.net</code>包中的API，提供了一些低级别的类和接口，帮助你专注于解决手上的问题。<br><code>java,net</code> 包提供了两种网络协议：</p>
+<ol>
+<li><strong>TCP</strong> 传输控制协议，应许你在两个设备之间建立连接。TCP协议广泛使用与网络协议中，被称为TCP/IP.</li>
+<li><strong>UDP</strong> 用户数据协议，一种无连接协议，允许数据包在应用程序之间传输。<br>本文将了解以下两个主题：</li>
+</ol>
+<ul>
+<li><strong>Socket Programming</strong>,网络编程中最广泛使用的概念并且也是解释的最清楚的一部分。</li>
+<li><strong>URL Processing</strong>,将单独讲解，<a href="https://www.tutorialspoint.com/java/java_url_processing.htm" target="_blank" rel="noopener">连接</a>。<h2 id="Socket-Programming"><a href="#Socket-Programming" class="headerlink" title="Socket Programming"></a>Socket Programming</h2>Sockets提供了两个电脑相互通讯的机制。客服端在交流后建立了socket并且尝试去链接服务端。<br>当链接建立过后，服务端也在交流后建立的socket。然后客户端和服务端能够通过写和读来通讯。<br><code>java.net.Socket</code>类提供了一个socket，<code>java.net.ServerSocket</code>类提供了服务端监客户端并建立链接的机制。<br>以下表示了两台电脑通过tcp建立链接的步骤：</li>
+</ul>
+<ol>
+<li>服务端创建 ServerSocket对象，提供那个端口将用于通讯。</li>
+<li>服务端调用ServerSocket的<code>accept()</code>方法。方法将等待之道客户端链接到刚刚指定的端口。</li>
+<li>在服务端处于等待的时候，客户端创建Socket对象，并指定需要链接的服务端地址以及端口号。</li>
+<li>Socket类的构造方法尝试将客服端与所指的服务端以及端口。如果链接建立了，客户端就有用能和服务端通讯的Socket对象。</li>
+<li>在服务端，<code>accept()</code>方法将返回一个可以与客户端链接成功的Socket对象。<br>在链接建立成功过后，将通过I/O流的方式进行通讯。每个Socket对象都拥有OutputStream和InputStream。客户端的InputStream链接的是服务端的OutputStream,OutputStream链接的是服务端的InputStream。<br>Tcp是双向的通讯协议，意味着可以同时在各自的流之间发送数据。以下是提供完整的实现套接字方法的有用类。<h2 id="ServerSocket-类方法"><a href="#ServerSocket-类方法" class="headerlink" title="ServerSocket 类方法"></a>ServerSocket 类方法</h2><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>方法和描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>public ServerSocket(int port) throws IOException  创建ServerSocket对象并绑定指定的端口，如果端口已经被其他的绑定了抛出异常</td>
+</tr>
+<tr>
+<td>2</td>
+<td>public ServerSocket(int port, int backlog) throws IOException backlog参数指定了有等待队列将能够存储多少传入客户端</td>
+</tr>
+<tr>
+<td>3</td>
+<td>public ServerSocket(int port, int backlog, InetAddress address) throws IOException InetAddress参数指定了绑定的本地的地址，InetAddress用于服务端有多个IP地址，指定某个确定的地址用于客户端的绑定</td>
+</tr>
+<tr>
+<td>4</td>
+<td>public ServerSocket() throws IOException 创建一个非绑定的对象，当你需要绑定服务时调用<code>bind()</code>来绑定ServerSocket</td>
+</tr>
+<tr>
+<td>如果ServerSocket的构造方法没有抛出异常，表明你的程序已经成功的绑定了指定的端口，等待客户端的链接。</td>
+<td></td>
+</tr>
+<tr>
+<td>ServerSocket的常用方法：</td>
+<td></td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>方法和描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>public int getLocalPort() 返回服务端监听的端口。这个方法是有用的在你构建的时候传递0作为参数给构造方法，让他自己为你寻找可用的端口。</td>
+</tr>
+<tr>
+<td>2</td>
+<td>public Socket accept() throws IOException 等待客户端的连入。方法将一直阻塞，知道客户端链接或者等待超时，假设已经过<code>setSoTimeout()</code>方法设置了超时时间。否者方法将永远阻塞</td>
+</tr>
+<tr>
+<td>3</td>
+<td>public void setSoTimeout(int timeout) 设置服务端等待客户端连入的等待时间</td>
+</tr>
+<tr>
+<td>4</td>
+<td>public void bind(SocketAddress host, int backlog) 将套接字绑定到SocketAddress对象中指定的服务器和端口。如果您使用无参数构造函数实例化了ServerSocket，请使用此方法。</td>
+</tr>
+</tbody></table>
+<p>当ServerSocket的accept()方法调用后，只有客户端链接过后才会返回。在客户端链接过后，ServerSocket在未指定的端口上创建一个新的Socket，并返回对此新Socket的引用。此后TCP链接将在客户端和服务端之间，回话开始。</p>
+<h2 id="Socket-类方法"><a href="#Socket-类方法" class="headerlink" title="Socket 类方法"></a>Socket 类方法</h2><p><code>java.net.Socket</code> 类提供了一个可以和服务端进行交流得到Socket对象。客户端通过创建获得一个Socket对象，服务端通过accept()方法获得Socket对象。<br>Socket有5个构造方法用于去链接服务端。</p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>方法和描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>public Socket(String host, int port) throws UnknownHostException, IOException. 尝试根据指定的服务地址和端口链接服务端。如果不抛出异常表示链接服务端成功</td>
+</tr>
+<tr>
+<td>2</td>
+<td>public Socket(InetAddress host, int port) throws IOException 跟上面的方法一样，只是服务端的地址是InetAddress对象</td>
+</tr>
+<tr>
+<td>3</td>
+<td>public Socket(String host, int port, InetAddress localAddress, int localPort) throws IOException. 链接指定服务端地址和端口，并在本地的地址和端口创建socket对象</td>
+</tr>
+<tr>
+<td>4</td>
+<td>public Socket(InetAddress host, int port, InetAddress localAddress, int localPort) throws IOException. 于前一个方法类似，只是服务端的地址是一个InetAddress对象而非String</td>
+</tr>
+<tr>
+<td>5</td>
+<td>public Socket() 创建一个不立即建立的Socket对象。使用connect()方法链接服务端</td>
+</tr>
+</tbody></table>
+<p>构造方法返回的不仅仅只是一个Socket对象，而是一个尝试去链接指定地址和端口的服务端的Socket对象。<br>Socket类的一些常用方法如下一。注意客服端个服务端都有socket对象，所以一下方法两者都可以调用。</p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>方法和描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>public void connect(SocketAddress host, int timeout) throws IOException 链接指定的服务端。改方式仅仅只是在调用Socket的无参构造方法时需要需要</td>
+</tr>
+<tr>
+<td>2</td>
+<td>public InetAddress getInetAddress() 返回电脑中Socket对象的链接地址</td>
+</tr>
+<tr>
+<td>3</td>
+<td>public int getPort() 返回Socket对象绑定的远程机上的端口</td>
+</tr>
+<tr>
+<td>4</td>
+<td>public int getLocalPort() 返回Socket对象绑定的本地上的端口</td>
+</tr>
+<tr>
+<td>5</td>
+<td>public SocketAddress getRemoteSocketAddress() 返回远程Socket对象地址</td>
+</tr>
+<tr>
+<td>6</td>
+<td>public InputStream getInputStream() throws IOException 返回Socket的输入流，其实与远程的输出流链接</td>
+</tr>
+<tr>
+<td>7</td>
+<td>public OutputStream getOutputStream() throws IOException 返回Socket的输出流，其与远程的输入流链接</td>
+</tr>
+<tr>
+<td>8</td>
+<td>public void close() throws IOException 关闭Socket，是的Socket对象不再能够再次连接到任何服务器</td>
+</tr>
+<tr>
+<td>## InetAddress 类方法</td>
+<td></td>
+</tr>
+<tr>
+<td>这个类表示Internet 协议地址即IP。下面是Socket编程中常用的方法。</td>
+<td></td>
+</tr>
+<tr>
+<td>序号</td>
+<td>方法和描述</td>
+</tr>
+<tr>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>1</td>
+<td>static InetAddress getByAddress(byte[] addr) 给出给定原始IP地址的InetAddress对象</td>
+</tr>
+<tr>
+<td>2</td>
+<td>static InetAddress getByAddress(String host, byte[] addr) 根据指定的地址返回InetAddress对象</td>
+</tr>
+<tr>
+<td>3</td>
+<td>static InetAddress getByName(String host) 确定主机名称的IP地址。</td>
+</tr>
+<tr>
+<td>4</td>
+<td>String getHostAddress() 以文本形式返回IP地址</td>
+</tr>
+<tr>
+<td>5</td>
+<td>String getHostName() 返回主机地址</td>
+</tr>
+<tr>
+<td>6</td>
+<td>static InetAddress InetAddress getLocalHost() 返回本地地址</td>
+</tr>
+<tr>
+<td>7</td>
+<td>String toString() 返回Ip的String</td>
+</tr>
+</tbody></table>
+<h2 id="Socket编程例子"><a href="#Socket编程例子" class="headerlink" title="Socket编程例子"></a>Socket编程例子</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; File Name GreetingClient.java</span><br><span class="line">import java.net.*;</span><br><span class="line">import java.io.*;</span><br><span class="line"></span><br><span class="line">public class GreetingClient &#123;</span><br><span class="line"></span><br><span class="line">   public static void main(String [] args) &#123;</span><br><span class="line">      String serverName &#x3D; args[0];</span><br><span class="line">      int port &#x3D; Integer.parseInt(args[1]);</span><br><span class="line">      try &#123;</span><br><span class="line">         System.out.println(&quot;Connecting to &quot; + serverName + &quot; on port &quot; + port);</span><br><span class="line">         Socket client &#x3D; new Socket(serverName, port);</span><br><span class="line">         </span><br><span class="line">         System.out.println(&quot;Just connected to &quot; + client.getRemoteSocketAddress());</span><br><span class="line">         OutputStream outToServer &#x3D; client.getOutputStream();</span><br><span class="line">         DataOutputStream out &#x3D; new DataOutputStream(outToServer);</span><br><span class="line">         </span><br><span class="line">         out.writeUTF(&quot;Hello from &quot; + client.getLocalSocketAddress());</span><br><span class="line">         InputStream inFromServer &#x3D; client.getInputStream();</span><br><span class="line">         DataInputStream in &#x3D; new DataInputStream(inFromServer);</span><br><span class="line">         </span><br><span class="line">         System.out.println(&quot;Server says &quot; + in.readUTF());</span><br><span class="line">         client.close();</span><br><span class="line">      &#125;catch(IOException e) &#123;</span><br><span class="line">         e.printStackTrace();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Socker-服务端例子"><a href="#Socker-服务端例子" class="headerlink" title="Socker 服务端例子"></a>Socker 服务端例子</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">import java.net.*;</span><br><span class="line">import java.io.*;</span><br><span class="line"></span><br><span class="line">public class GreetingServer extends Thread &#123;</span><br><span class="line">   private ServerSocket serverSocket;</span><br><span class="line">   </span><br><span class="line">   public GreetingServer(int port) throws IOException &#123;</span><br><span class="line">      serverSocket &#x3D; new ServerSocket(port);</span><br><span class="line">      serverSocket.setSoTimeout(10000);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   public void run() &#123;</span><br><span class="line">      while(true) &#123;</span><br><span class="line">         try &#123;</span><br><span class="line">            System.out.println(&quot;Waiting for client on port &quot; + </span><br><span class="line">               serverSocket.getLocalPort() + &quot;...&quot;);</span><br><span class="line">            Socket server &#x3D; serverSocket.accept();</span><br><span class="line">            </span><br><span class="line">            System.out.println(&quot;Just connected to &quot; + server.getRemoteSocketAddress());</span><br><span class="line">            DataInputStream in &#x3D; new DataInputStream(server.getInputStream());</span><br><span class="line">            </span><br><span class="line">            System.out.println(in.readUTF());</span><br><span class="line">            DataOutputStream out &#x3D; new DataOutputStream(server.getOutputStream());</span><br><span class="line">            out.writeUTF(&quot;Thank you for connecting to &quot; + server.getLocalSocketAddress()</span><br><span class="line">               + &quot;\nGoodbye!&quot;);</span><br><span class="line">            server.close();</span><br><span class="line">            </span><br><span class="line">         &#125;catch(SocketTimeoutException s) &#123;</span><br><span class="line">            System.out.println(&quot;Socket timed out!&quot;);</span><br><span class="line">            break;</span><br><span class="line">         &#125;catch(IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            break;</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   public static void main(String [] args) &#123;</span><br><span class="line">      int port &#x3D; Integer.parseInt(args[0]);</span><br><span class="line">      try &#123;</span><br><span class="line">         Thread t &#x3D; new GreetingServer(port);</span><br><span class="line">         t.start();</span><br><span class="line">      &#125;catch(IOException e) &#123;</span><br><span class="line">         e.printStackTrace();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ java GreetingClient localhost 6066</span><br><span class="line">Connecting to localhost on port 6066</span><br><span class="line">Just connected to localhost&#x2F;127.0.0.1:6066</span><br><span class="line">Server says Thank you for connecting to &#x2F;127.0.0.1:6066</span><br><span class="line">Goodbye!</span><br></pre></td></tr></table></figure>
+
+
+<p><a href="https://www.tutorialspoint.com/java/java_networking.htm" target="_blank" rel="noopener">原文</a></p>
+
+                    </article>
+                    
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">This article was last updated on <span id="date-expire-num"></span> days ago, and the information described in the article may have changed.</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2020-07-18");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">Published at&nbsp;<time datetime="2017-04-10T11:35:43.000Z" itemprop="datePublished">2017-04-10</time>
+
+    , Updated at&nbsp;<time datetime="2020-07-18T13:05:05.099Z" itemprop="dateModified">2020-07-18</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+<span class="post-categories-list mt-2">
+
+<a class="post-categories-list-item" href='/categories/Java%E8%AF%91%E6%96%87/'>Java译文</a>
+
+</span>
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/tags/Socket/" rel="tag">#&nbsp;Socket</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/2017/05/06/Android-Handler/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">Android-Handler</div>
+            </a>
+        </li>
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/2017/04/08/Android%E5%BC%80%E5%8F%91%E4%B8%AD%E5%9C%B0%E5%9B%BE%E5%9D%90%E6%A0%87%E7%B3%BB%E4%BB%A5%E5%8F%8A%E8%B0%83%E7%94%A8%E5%9C%B0%E5%9B%BE%E5%AF%BC%E8%88%AA/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">Android开发中地图坐标系以及调用地图导航</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://lysmbetter.top/2017/04/10/java-%E7%BD%91%E7%BB%9C/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://lysmbetter.top/2017/04/10/java-%E7%BD%91%E7%BB%9C/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+<script id="disqus-thread-script">
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document;
+        var s = d.createElement('script');
+        s.src = '//lysmbetter.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', + new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="http://lysmbetter.top">Better</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+    <!-- Busuanzi User Views -->
+    <span id="busuanzi_container_site_uv" hidden>
+        <span></span>
+        <span id="busuanzi_value_site_uv"></span>
+        <span>Viewers</span>
+        
+            <span>|</span>
+        
+    </span>
+
+
+
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+document.getElementById('copyright-year').textContent = new Date().getFullYear();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/lib/vanilla-lazyload/lazyload.min.js" async></script>
+    <script src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+<!-- Offset -->
+
+
+
+
+<!-- Comment -->
+
+    
+        <script id="dsq-count-scr" src="https://lysmbetter.disqus.com/count.js" async></script>
+
+    
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>

@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hans">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+    <link rel="dns-prefetch" href="//busuanzi.ibruce.info">
+
+
+<!-- comment -->
+
+
+    <link rel="dns-prefetch" href="//disqus.com">
+    <link rel="dns-prefetch" href="//lysmbetter.disqus.com">
+
+
+
+
+
+
+<!-- analytics -->
+
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+    <!-- Busuanzi -->
+    
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" as="script">
+
+
+
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>动态修改Activity名称 | Better</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/img/suka-favicon.ico">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/css/highlight/github.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/css/highlight/github.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Better"><meta name="msapplication-starturl" content="http://lysmbetter.top"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Better"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="动态修改Activity名称 | Better"><meta property="og:site_name" content="Better"><meta property="og:type" content="article"><meta property="og:url" content="http://lysmbetter.top/2021/08/01/%E5%8A%A8%E6%80%81%E4%BF%AE%E6%94%B9Activity%E5%90%8D%E7%A7%B0/"><meta property="og:locale" content="zh-Hans"><meta name="description" content="最近公司项目中的APP，在Oppo、Vivo手机上安装时，提示有病毒，异常展示弹窗。 最后从业务逻辑上排查，发现是锁屏页的Activity名称被标记位病毒弹窗了，这怎么能行，弹个锁屏保护页就不行了吗。 调试发现，是锁屏页的类名被标记被病毒了。解决报毒的方式也很简单，就是修改Activity的名称，修改后再次安装安装包，没有报毒了。 虽然修改了名称这次是没有报毒了，但是如果对方也更新校验规则呢，岂不 - Better - Better"><meta name="keywords" content="Gradle任务, android"><meta property="article:published_time" content="2021-08-01T10:31:14.000Z"><meta property="article:modified_time" content="2021-08-01T10:33:34.721Z"><meta property="og:updated_time" content="2021-08-01T10:33:34.721Z"><meta property="article:author" content="Better"><meta property="article:tag" content="Gradle任务, android"><meta name="twitter:card" content="summary">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="http://lysmbetter.top/2021/08/01/%E5%8A%A8%E6%80%81%E4%BF%AE%E6%94%B9Activity%E5%90%8D%E7%A7%B0/">
+
+    <meta name="generator" content="Hexo 4.2.1">
+
+    <!-- ### Analytics ### -->
+    
+
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "http://lysmbetter.top/2021/08/01/%E5%8A%A8%E6%80%81%E4%BF%AE%E6%94%B9Activity%E5%90%8D%E7%A7%B0/",
+    "@type": "BlogPosting",
+    "logo": "http://lysmbetter.top/img/suka-favicon.ico",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://lysmbetter.top/2021/08/01/%E5%8A%A8%E6%80%81%E4%BF%AE%E6%94%B9Activity%E5%90%8D%E7%A7%B0/"
+    },
+    "headline": "动态修改Activity名称 | Better",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://lysmbetter.top/img/suka-favicon.ico"
+    },
+    
+    "datePublished": "2021-08-01T10:31:14.000Z",
+    "dateModified": "2021-08-01T10:33:34.721Z",
+    "author": {
+        "@type": "Person",
+        "name": "Better",
+        "image": {
+            "@type": "ImageObject",
+            "url": "http://lysmbetter.top/img/default_avatar.png"
+        },
+        "description": "业精于勤荒于嬉"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Better",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://lysmbetter.top/img/suka-favicon.ico"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "http://lysmbetter.top/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "Gradle任务, android",
+    "description": "最近公司项目中的APP，在Oppo、Vivo手机上安装时，提示有病毒，异常展示弹窗。 最后从业务逻辑上排查，发现是锁屏页的Activity名称被标记位病毒弹窗了，这怎么能行，弹个锁屏保护页就不行了吗。 调试发现，是锁屏页的类名被标记被病毒了。解决报毒的方式也很简单，就是修改Activity的名称，修改后再次安装安装包，没有报毒了。 虽然修改了名称这次是没有报毒了，但是如果对方也更新校验规则呢，岂不 - Better - Better"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+</head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/">Better</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                业精于勤荒于嬉
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/" class="navbar-link">Home</a>
+    
+    
+        <a href="/archives/" class="navbar-link">Archives</a>
+    
+    
+        <a href="/search" class="navbar-link">Search</a>
+    
+    
+        <a href="/tags" class="navbar-link">Tags</a>
+    
+        <a href="/about" class="navbar-link">About</a>
+    
+    
+        <div class="dropdown dropdown-right">
+    <a class="navbar-link dropdown-toggle" tabindex="0">Share</a>
+    <ul class="menu share-menu">
+
+        <!-- Share Weibo -->
+        
+
+        <!-- Share Twitter -->
+        
+
+        <!-- Share Facebook -->
+        
+
+        <!-- Share Google+ -->
+        
+
+        <!-- Share LinkedIn -->
+        
+
+        <!-- Share QQ -->
+        
+
+        <!-- Share Telegram -->
+        
+
+        <!-- QRCode -->
+        
+        <li class="menu-item">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAAAAAAYplnuAAACo0lEQVR42u3b3U4CMRRFYd7/pfXKRAk9e+12MCGz5oYoYD+IpeePx9cHXg/RokWLviH6MVy/H/PnyS/u//n5+fZ5jVf3YYdo0RD98p/+xQKrx6wWTy+QrCNa9C56tVmmzVMfDk/g1TrLTSta9EXoabOsNtx0sCS8aNHvRE8HBN1UU0AkWvS70CkYaoL+6XAih9dxlCf69uhpk/zn7WXZuOhbo0ngng6OFExNv2sSCtGiaX16F7vaRFMBkgRfy4BMtGiAXi1KiikpkEqbjuBFi27RJJltCzk0QU5vmmjRO+hU+N4NkGhDiDZJRYtu0DShpQXGaQiA4GOxRrRo2BufmvSpWd82UaeDRrToE3TzB5uDiDQ26VCWaNFXoFNA0xYc28NkbH6KFg3QTdE8Jaj0kGo/CESL3kE3DZ7UNG0S3SmxEC26RZ9sNtIQIsMCZOhQtGiCJgF/M1hIB2HpUJdo0S26/oAHqNRApYnCdrFG9O3R05NTgYUcEKSoTgaxRIsm6NTQmTYmaTDRYGra3KJFn6CbIg5pCDWF+RS8iRbdHi5T4ZweLjTAJ2D8RQbRoocvUTabhSQI7UEyvlmiRQP0BENfLmgWhQ1T1NAXLboY+ibF9dSkR0XyUJBHVVPRoocCJAGkYuG0MZuBQ9TQFy06fE43RcNmiJsUzUmjSbToBk2HTMjgd0qUSWFdtOgTNA3oSeGbBlAJGJMA0aIDOg0Grg4EOqSyO5QlWnSLbho5zTBKapKm5Fi06F00KZLQ4gwZdDlJbkWLpugm2CENe5rUpiBNtOgTdCrMtMXzJqBKl2jRV6NJE5MOW9E1qikE0aI30M0LOUkaqglI0aIvCJjIgdJuVpxMiBYN0bT4mAbAacEnNZSOizWib43+pEu0aNGib4T+BgwYuGYF0r7yAAAAAElFTkSuQmCC" alr="QRCode">
+        </li>
+        
+
+    </ul>
+</div>
+    
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">动态修改Activity名称</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/img/default_avatar.png" src="/img/suka-lazyload.gif" alt="Better's Avatar">
+        <span>2021-08-01</span>
+        
+            <span class="suka-devide-dot"></span>
+            <a class="category-link" href="/categories/Android/">Android</a>
+        
+        
+            <!-- Busuanzi Post Views -->
+<span id="busuanzi_container_page_pv" hidden>
+    <span class="suka-devide-dot"></span>
+    <span></span>
+    <span id="busuanzi_value_page_pv"></span>
+    <span>Views</span>
+</span>
+        
+        
+    </p>
+    <div class="post-header-info-right">
+        
+            <div class="dropdown dropdown-right">
+<a class="dropdown-toggle" tabindex="0">Share the post</a>
+<ul class="menu share-menu">
+    <!-- Share Weibo -->
+    
+
+    <!-- Share Twitter -->
+    
+
+    <!-- Share Facebook -->
+    
+
+    <!-- Share Google+ -->
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+
+    <!-- QRCode -->
+    
+    <li class="menu-item">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAAAAAAYplnuAAACo0lEQVR42u3b3U4CMRRFYd7/pfXKRAk9e+12MCGz5oYoYD+IpeePx9cHXg/RokWLviH6MVy/H/PnyS/u//n5+fZ5jVf3YYdo0RD98p/+xQKrx6wWTy+QrCNa9C56tVmmzVMfDk/g1TrLTSta9EXoabOsNtx0sCS8aNHvRE8HBN1UU0AkWvS70CkYaoL+6XAih9dxlCf69uhpk/zn7WXZuOhbo0ngng6OFExNv2sSCtGiaX16F7vaRFMBkgRfy4BMtGiAXi1KiikpkEqbjuBFi27RJJltCzk0QU5vmmjRO+hU+N4NkGhDiDZJRYtu0DShpQXGaQiA4GOxRrRo2BufmvSpWd82UaeDRrToE3TzB5uDiDQ26VCWaNFXoFNA0xYc28NkbH6KFg3QTdE8Jaj0kGo/CESL3kE3DZ7UNG0S3SmxEC26RZ9sNtIQIsMCZOhQtGiCJgF/M1hIB2HpUJdo0S26/oAHqNRApYnCdrFG9O3R05NTgYUcEKSoTgaxRIsm6NTQmTYmaTDRYGra3KJFn6CbIg5pCDWF+RS8iRbdHi5T4ZweLjTAJ2D8RQbRoocvUTabhSQI7UEyvlmiRQP0BENfLmgWhQ1T1NAXLboY+ibF9dSkR0XyUJBHVVPRoocCJAGkYuG0MZuBQ9TQFy06fE43RcNmiJsUzUmjSbToBk2HTMjgd0qUSWFdtOgTNA3oSeGbBlAJGJMA0aIDOg0Grg4EOqSyO5QlWnSLbho5zTBKapKm5Fi06F00KZLQ4gwZdDlJbkWLpugm2CENe5rUpiBNtOgTdCrMtMXzJqBKl2jRV6NJE5MOW9E1qikE0aI30M0LOUkaqglI0aIvCJjIgdJuVpxMiBYN0bT4mAbAacEnNZSOizWib43+pEu0aNGib4T+BgwYuGYF0r7yAAAAAElFTkSuQmCC" alt="QRCode">
+    </li>
+    
+
+</ul>
+</div>
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                        
+                    
+                    <article id="post-content">
+                        <p>最近公司项目中的APP，在<code>Oppo</code>、<code>Vivo</code>手机上安装时，提示有病毒，异常展示弹窗。</p>
+<p>最后从业务逻辑上排查，发现是锁屏页的<code>Activity</code>名称被标记位病毒弹窗了，这怎么能行，弹个锁屏保护页就不行了吗。</p>
+<p>调试发现，是锁屏页的类名被标记被病毒了。解决报毒的方式也很简单，就是修改Activity的名称，修改后再次安装安装包，没有报毒了。</p>
+<p>虽然修改了名称这次是没有报毒了，但是如果对方也更新校验规则呢，岂不是又要修改，那么最好是每次发版的时候，名称自动修改。所以问题就变为了如何动态修改Activity的名称了。</p>
+<p>最后选择的方式是一种简单的方式，利用Andorid Studio中构建变种代码的方式<a href="https://developer.android.com/studio/build/build-variants" target="_blank" rel="noopener">build-variants</a>，即<code>Flavor</code>特性来实现，每个<code>Flavor</code>都可以在自己对应的src目录下添加<code>java</code>和<code>res</code>等代码，最后在打包的时候，所有的<code>Flavor</code>代码和<code>main</code>中中代码都会被合并到一起。那么在每次打包的前，先自动生成一个锁屏页，并且将这个锁屏页的类名全路径保存下来，这样动态修改的Activity名称的方式就完成了。最后是要用到展示锁屏页的时候，因为类名是动态变化的，只有从刚刚保存的类名中取出一个类名来展示Activity就行。说干就干。</p>
+<p>实现的前提是先要找到AndroidStudio中在打包前的一个动作，添加自己的业务逻辑。通过打印<code>assembleRelease</code>任务是可以找到第一个任务的，然后可以新建一个gralde任务，让第一个任务依赖这个新建的任务，这样在打包前会先执行自己定义的任务，算是找到了打包前的动作。不过在同事的提醒下发现，这里有个更简便的方式是，利用<code>Project</code>对象，比如如果想顶一个全局的变量，会在gradle中定义</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">project.ext &#123;</span><br><span class="line">    compileSdkVersion = <span class="number">28</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>查看<code>Project</code>源码，发现它本身就提供了一个构建前的操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;Adds a closure to be called immediately before this project is evaluated. The project is passed to the closure</span></span><br><span class="line"><span class="comment"> * as a parameter.&lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> closure The closure to call.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">beforeEvaluate</span><span class="params">(Closure closure)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>最后修改如下：</p>
+<ol>
+<li>新增一个<code>flavorDimensions</code>，这个<code>Flavor</code>只是用来保存目标<code>Activity</code>代码。</li>
+<li>在<code>beforeEvaluate</code>增加逻辑修改<code>Java</code>代码和<code>Manifest</code>代码<ul>
+<li>修改<code>Java</code>代码。将锁屏页的所有业务逻辑都放在基类中，然后派生一个子类实现它，这个子类虽然继承于基类，但是什么业务事情都不用做。它只干一件事情，即提供一个<code>Activity</code>入口，因为它的所有业务逻辑都在基类中，它里面没有任何代码。同时将生产的<code>Activity</code>类名保存在<code>BuildConfig</code>文件中。</li>
+<li>修改<code>Manifest</code>。代码在<code>Flavor</code>中的<code>manifest.xml</code>文件中申明上一步创建的目标Activity组件信息。</li>
+</ul>
+</li>
+<li>修改使用逻辑。修改目标页面的弹出逻辑，从读取<code>BuildConfig</code>中的锁屏页类名，创建<code>Intent</code>的方式变为<code>new Intent(context, Class.forName(path))</code></li>
+</ol>
+
+                    </article>
+                    
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">This article was last updated on <span id="date-expire-num"></span> days ago, and the information described in the article may have changed.</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2021-08-01");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">Published at&nbsp;<time datetime="2021-08-01T10:31:14.000Z" itemprop="datePublished">2021-08-01</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+<span class="post-categories-list mt-2">
+
+<a class="post-categories-list-item" href='/categories/Android/'>Android</a>
+
+</span>
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/tags/Gradle%E4%BB%BB%E5%8A%A1/" rel="tag">#&nbsp;Gradle任务</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/2020/07/18/Windows-obfuscator-llvm6-0/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">Windows obfuscator llvm6.0</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://lysmbetter.top/2021/08/01/%E5%8A%A8%E6%80%81%E4%BF%AE%E6%94%B9Activity%E5%90%8D%E7%A7%B0/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://lysmbetter.top/2021/08/01/%E5%8A%A8%E6%80%81%E4%BF%AE%E6%94%B9Activity%E5%90%8D%E7%A7%B0/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+<script id="disqus-thread-script">
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document;
+        var s = d.createElement('script');
+        s.src = '//lysmbetter.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', + new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="http://lysmbetter.top">Better</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+    <!-- Busuanzi User Views -->
+    <span id="busuanzi_container_site_uv" hidden>
+        <span></span>
+        <span id="busuanzi_value_site_uv"></span>
+        <span>Viewers</span>
+        
+            <span>|</span>
+        
+    </span>
+
+
+
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+document.getElementById('copyright-year').textContent = new Date().getFullYear();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/lib/vanilla-lazyload/lazyload.min.js" async></script>
+    <script src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+<!-- Offset -->
+
+
+
+
+<!-- Comment -->
+
+    
+        <script id="dsq-count-scr" src="https://lysmbetter.disqus.com/count.js" async></script>
+
+    
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>
