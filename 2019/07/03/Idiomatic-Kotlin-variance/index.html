@@ -155,7 +155,7 @@
     <meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Better"><meta name="msapplication-starturl" content="http://lysmbetter.top"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Better"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <!-- ### The Open Graph & Twitter Card Protocol ### -->
-    <meta property="og:title" content="Idiomatic Kotlin: variance | Better"><meta property="og:site_name" content="Better"><meta property="og:type" content="article"><meta property="og:url" content="http://lysmbetter.top/2019/07/03/Idiomatic-Kotlin-variance/"><meta property="og:locale" content="zh-Hans"><meta name="description" content="variance原文没有怎么看懂，翻译过来就是形变，更抽象。variance和variant都是一个意思。 variance定义了子类型和父类型的在进行一定操作后的结果之间的类型关系。  在面向对象语言中通常会有子类型（subtype）的概念，表示某类是某类的子类。 父类是可以引用子类类型对象的。 1A item &#x3D; new B();  假设有A，B两个类，类B继承自类A，用≤表示继承关系，即B≤ - Better - Better"><meta name="keywords" content="android"><meta property="article:published_time" content="2019-07-03T13:57:06.000Z"><meta property="article:modified_time" content="2020-07-18T13:05:05.029Z"><meta property="og:updated_time" content="2020-07-18T13:05:05.029Z"><meta property="article:author" content="Better"><meta property="article:tag" content="android"><meta name="twitter:card" content="summary">
+    <meta property="og:title" content="Idiomatic Kotlin: variance | Better"><meta property="og:site_name" content="Better"><meta property="og:type" content="article"><meta property="og:url" content="http://lysmbetter.top/2019/07/03/Idiomatic-Kotlin-variance/"><meta property="og:locale" content="zh-Hans"><meta name="description" content="variance原文没有怎么看懂，翻译过来就是形变，更抽象。variance和variant都是一个意思。 variance定义了子类型和父类型的在进行一定操作后的结果之间的类型关系。  在面向对象语言中通常会有子类型（subtype）的概念，表示某类是某类的子类。 父类是可以引用子类类型对象的。 1A item &#x3D; new B();  假设有A，B两个类，类B继承自类A，用≤表示继承关系，即B≤ - Better - Better"><meta name="keywords" content="android"><meta property="article:published_time" content="2019-07-03T13:57:06.000Z"><meta property="article:modified_time" content="2021-08-08T14:18:53.083Z"><meta property="og:updated_time" content="2021-08-08T14:18:53.083Z"><meta property="article:author" content="Better"><meta property="article:tag" content="android"><meta name="twitter:card" content="summary">
 
     
 
@@ -196,7 +196,7 @@
     },
     
     "datePublished": "2019-07-03T13:57:06.000Z",
-    "dateModified": "2020-07-18T13:05:05.029Z",
+    "dateModified": "2021-08-08T14:18:53.083Z",
     "author": {
         "@type": "Person",
         "name": "Better",
@@ -359,7 +359,7 @@
 <ol>
 <li><p>如果<code>B≤A</code>，<code>f(B)≤f(A)</code>，那么操作<code>f(⋅)</code>就是<code>covariance（协变）</code></p>
 </li>
-<li><p>如果<code>B≤A</code>，<code>f(A)≤f(B)</code>，那么操作<code>f(⋅)</code>就是<code>contrvariance（协变）</code></p>
+<li><p>如果<code>B≤A</code>，<code>f(A)≤f(B)</code>，那么操作<code>f(⋅)</code>就是<code>contrvariance（逆变）</code></p>
 </li>
 <li><p>如果<code>B≤A</code>，<code>f(A)</code>和<code>f(B)</code>之间没有继承关系，那么操作<code>f(⋅)</code>就是<code>invariance（不变）</code></p>
 </li>
@@ -423,7 +423,7 @@
     <blockquote id="date-expire-notification" class="post-expired-notify">This article was last updated on <span id="date-expire-num"></span> days ago, and the information described in the article may have changed.</blockquote>
     <script>
     (function() {
-        var dateUpdate = Date.parse("2020-07-18");
+        var dateUpdate = Date.parse("2021-08-08");
         var nowDate = new Date();
         var a = nowDate.getTime();
         var b = a - dateUpdate;
@@ -439,7 +439,7 @@
 
 <p class="post-footer-info mb-0 pt-0">Published at&nbsp;<time datetime="2019-07-03T13:57:06.000Z" itemprop="datePublished">2019-07-03</time>
 
-    , Updated at&nbsp;<time datetime="2020-07-18T13:05:05.029Z" itemprop="dateModified">2020-07-18</time>
+    , Updated at&nbsp;<time datetime="2021-08-08T14:18:53.083Z" itemprop="dateModified">2021-08-08</time>
 
 </p>
 <p class="post-footer-info mb-0 pt-2">
