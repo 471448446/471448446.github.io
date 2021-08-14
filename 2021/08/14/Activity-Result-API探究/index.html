@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hans">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+    <link rel="dns-prefetch" href="//busuanzi.ibruce.info">
+
+
+<!-- comment -->
+
+
+    <link rel="dns-prefetch" href="//disqus.com">
+    <link rel="dns-prefetch" href="//lysmbetter.disqus.com">
+
+
+
+
+
+
+<!-- analytics -->
+
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+    <!-- Busuanzi -->
+    
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" as="script">
+
+
+
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>Activity Result API探究 | Better</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/img/suka-favicon.ico">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/css/highlight/github.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/css/highlight/github.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Better"><meta name="msapplication-starturl" content="http://lysmbetter.top"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Better"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="Activity Result API探究 | Better"><meta property="og:site_name" content="Better"><meta property="og:type" content="article"><meta property="og:url" content="http://lysmbetter.top/2021/08/14/Activity-Result-API%E6%8E%A2%E7%A9%B6/"><meta property="og:locale" content="zh-Hans"><meta name="description" content="官方文档：Activity Result API 1androidx.activity:activity:1.2.4  传统的启动Activity获取结果，步骤是怎样：  首先得定义启动得Intent数据 确定当前得启动环境，是在Activity还是在Fragment。因为Activity.startActivityForResult()和Fragment.startActivityForResu - Better - Better"><meta name="keywords" content="Android-Jetpack, android"><meta property="article:published_time" content="2021-08-14T04:09:17.000Z"><meta property="article:modified_time" content="2021-08-14T04:13:05.259Z"><meta property="og:updated_time" content="2021-08-14T04:13:05.259Z"><meta property="article:author" content="Better"><meta property="article:tag" content="Android-Jetpack, android"><meta name="twitter:card" content="summary">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="http://lysmbetter.top/2021/08/14/Activity-Result-API%E6%8E%A2%E7%A9%B6/">
+
+    <meta name="generator" content="Hexo 4.2.1">
+
+    <!-- ### Analytics ### -->
+    
+
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "http://lysmbetter.top/2021/08/14/Activity-Result-API%E6%8E%A2%E7%A9%B6/",
+    "@type": "BlogPosting",
+    "logo": "http://lysmbetter.top/img/suka-favicon.ico",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://lysmbetter.top/2021/08/14/Activity-Result-API%E6%8E%A2%E7%A9%B6/"
+    },
+    "headline": "Activity Result API探究 | Better",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://lysmbetter.top/img/suka-favicon.ico"
+    },
+    
+    "datePublished": "2021-08-14T04:09:17.000Z",
+    "dateModified": "2021-08-14T04:13:05.259Z",
+    "author": {
+        "@type": "Person",
+        "name": "Better",
+        "image": {
+            "@type": "ImageObject",
+            "url": "http://lysmbetter.top/img/default_avatar.png"
+        },
+        "description": "业精于勤荒于嬉"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Better",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://lysmbetter.top/img/suka-favicon.ico"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "http://lysmbetter.top/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "Android-Jetpack, android",
+    "description": "官方文档：Activity Result API 1androidx.activity:activity:1.2.4  传统的启动Activity获取结果，步骤是怎样：  首先得定义启动得Intent数据 确定当前得启动环境，是在Activity还是在Fragment。因为Activity.startActivityForResult()和Fragment.startActivityForResu - Better - Better"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+</head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/">Better</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                业精于勤荒于嬉
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/" class="navbar-link">Home</a>
+    
+    
+        <a href="/archives/" class="navbar-link">Archives</a>
+    
+    
+        <a href="/search" class="navbar-link">Search</a>
+    
+    
+        <a href="/tags" class="navbar-link">Tags</a>
+    
+        <a href="/about" class="navbar-link">About</a>
+    
+    
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">Activity Result API探究</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/img/default_avatar.png" src="/img/suka-lazyload.gif" alt="Better's Avatar">
+        <span>2021-08-14</span>
+        
+            <span class="suka-devide-dot"></span>
+            <a class="category-link" href="/categories/Android/">Android</a>
+        
+        
+            <!-- Busuanzi Post Views -->
+<span id="busuanzi_container_page_pv" hidden>
+    <span class="suka-devide-dot"></span>
+    <span></span>
+    <span id="busuanzi_value_page_pv"></span>
+    <span>Views</span>
+</span>
+        
+        
+    </p>
+    <div class="post-header-info-right">
+        
+            <div class="dropdown dropdown-right">
+<a class="dropdown-toggle" tabindex="0">Share the post</a>
+<ul class="menu share-menu">
+    <!-- Share Weibo -->
+    
+
+    <!-- Share Twitter -->
+    
+
+    <!-- Share Facebook -->
+    
+
+    <!-- Share Google+ -->
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+
+    <!-- QRCode -->
+    
+    <li class="menu-item">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKQAAACkCAAAAAA83tqdAAACLklEQVR42u3cS24CMRBFUfa/aTKKFBFc75ZpFOK6PaGlNPZhYKifcrv/g+smUqRIkR+AvBXX4zPf908X/PH3Z/fPno/7ihyLrDZ9BKw2r0CPKLyvyNHI1SLpQFWQ7voiRXYWWT1THYbVcyJFvgtZfdFX64kUSZA0iE0BA/mwl0dBIo9DVgnRO18vyxZFHoWMRaPFAquEjR6oS6tqIo9CkoSLbELfT58XORdZJVAVpipSVUFFFbj8cogcidwNAMjmqz1IkVXkbGQqOiVgOlzpQLUSMZGjkCsQCRZS4JwCi5ezRZHHIEnCtVNIJR8wBTYiRe4k+qQZv1OwFTkbmYrvtMFJ7umQlMi5SNK47Hwh02JCdVBFzkZ2BuiqgKA6ZKQpgAMMkccj04BxpyBf3W8leCJHIjuDSx1IVcjCQbLI0cj2EAc8DNV6CS5yJjIFnqkQRZKudPCWRQORY5GdoWHSSEpNJpr0iZyLpIMbdECONlPjQJTIkcgEJAWBVBSgTSgUmYs8HpmCAjL0SQr+pLmFT7fIEci0cbUBgZHD2aqqiTweSZucaQCPBCikCCtSZGrIkyZ8N9BtTf2JHINMV0qaqmJBGgSJB0nkSCQt4ne/kDuvIkXem/8YgST9pABbfWAcmYscgyTNoU4BnzZByx8KkSKbCfxOETUlci8dHJHjkCl5Ik2m9MMhUmR6I8WQYboUjMSDI3IMkgStO83SbpC8nS2KPAr5yZdIkSJF/uH1BW/QGCYpktbgAAAAAElFTkSuQmCC" alt="QRCode">
+    </li>
+    
+
+</ul>
+</div>
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                        
+                    
+                    <article id="post-content">
+                        <p><a href="https://developer.android.com/training/basics/intents/result?hl=zh-cn#launch" target="_blank" rel="noopener">官方文档：Activity Result API</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">androidx.activity:activity:1.2.4</span><br></pre></td></tr></table></figure>
+
+<p>传统的启动<code>Activity</code>获取结果，步骤是怎样：</p>
+<ol>
+<li>首先得定义启动得<code>Intent</code>数据</li>
+<li>确定当前得启动环境，是在<code>Activity</code>还是在<code>Fragment</code>。因为<code>Activity.startActivityForResult()</code>和<code>Fragment.startActivityForResult()</code>决定了，结果数据是在<code>Activity</code>中还是在<code>Fragment</code>中处理</li>
+<li>启动<code>Activity.startActivityForResult()</code></li>
+<li>目标页面操作完成后，在<code>onActivityResult()</code>中处理数据</li>
+</ol>
+<p>传统的启动得方式，是有一些问题的</p>
+<ul>
+<li>需要定义变量区分每一个启动的返回结果，要么是<code>requestCode</code>，要么通过<code>resultCode</code>。</li>
+<li>得区分是启动环境，是在<code>Activity</code>，还是<code>Fragment</code>。</li>
+<li>同时得在<code>onActivityResult()</code>处来处理启动得结果，又是一堆switch。得通过<code>requestCode</code>判断是谁启动得。得通过<code>resultCode</code>判断结果是否成功。如果有返回值再通过<code>intent</code>来取数据。</li>
+<li>对于一些特定，已经固定的启动Activity方式，需要每次编写。比如启动相机拍照，在Intent中要传入，拍照图片的文件地址。格式是固定得，但是每次拍照，都要这么写，可能比较繁琐。当然这种定义一个全局的方法也行。不过如果换一个人实现这个功能，可能写法就又不一样了。</li>
+</ul>
+<p>而新的<code>Activity Result API</code>方式，它只需提供一个<code>ActivityResultContract</code>来输入数据，以提供怎样启动<code>Activity</code>。并提供了回调<code>ActivityResultCallback</code>来接收最终想要数据`。这样的好处是</p>
+<ul>
+<li>可以自定义启动的参数数据类型，通过一个泛型参数<code>I</code>来确定</li>
+<li>可以自定义想要的结果数据类型，通过一个泛型参数<code>O</code>来确定</li>
+<li>隐藏了<code>requestCode</code>逻辑，调用者并不需要关注这个了</li>
+<li>隐藏了处理结果逻辑，调用方只需要通过回调，自行处理返回的结果数据就行。</li>
+<li>结果数据处理可以不在Activity中处理，更灵活。</li>
+<li>简化了调用逻辑<ul>
+<li>对于启动，不需要区分上下文是<code>Activity</code>还是<code>Fragment</code>，只需要调用<code>ActivityResultLauncher.launch()</code>传入输入数据就完事了。</li>
+<li>对于结果数据，直接在回调中取就完事了</li>
+</ul>
+</li>
+</ul>
+<p>下面从实现的效果，来反向理解它的设计<br><strong>目标：简化为注册一个回调来接收结果</strong></p>
+<p>首先要实现这个目标，得定义一个回调用来接收数据，对应的就是<code>ActivityResultCallback&lt;O&gt;</code>（结果回调），类型<code>O</code>就是最后期望得到的数据类型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface ActivityResultCallback&lt;O&gt; &#123;</span><br><span class="line">    void onActivityResult(@SuppressLint(&quot;UnknownNullness&quot;) O result);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后得想办法支持自定义得输入类型。<br>启动一个Activity并获取它的结果过程，可看作是向一个Activity输入特定的数据，然后获取特定结果。当然启动Activity输入数据还是通过Intent来完成，回传数据也是通过<code>onActivityResult()</code>来完成，基本情况是不变的。<br>将这个过程抽象到具体的方法中。在<code>ActivityResultContract&lt;I, O&gt;</code>（启动约定），<code>I</code>是输入的数据类型，<code>O</code>是返回的结果类型。</p>
+<ol>
+<li><code>ActivityResultContract.createIntent(Context context,I input)</code>是准备启动的<code>Intent</code>，用以表示输入的数据<code>I</code>。</li>
+<li><code>ActivityResultContract.parseResult(int resultCode,Intent intent)</code>是用来解析结果数据，用以表示希望获取的数据。根据结果数据转换为想要的结果数据类型<code>O</code>。</li>
+</ol>
+<p>到这里有了“启动约定”和“结果回调”，其实可以完成目标了，调步骤如下</p>
+<ol>
+<li>申明一个<code>ActivityResultContract</code>的实现者，<ul>
+<li>实现<code>createIntent()</code>，获取输入的<code>I</code>数据，怎样来组装<code>Intent</code></li>
+<li>实现<code>parseResult()</code>，将结果数据转化为希望的结果数据<code>O</code></li>
+</ul>
+</li>
+<li>调用<code>ActivityResultContract.createIntent()</code>，获取<code>Intent</code>。</li>
+<li>再通过<code>Activity.startActivityForResult()</code>启动目标Activity。</li>
+<li>最后获取结果数据。因为获取启动Activity结果的底层功能逻辑是没有变化的，还是在<code>Activity.onActivityResult()</code>处处理。所以调用<code>parseResult()</code>处理数据，最后回调接口得到最终的数据。</li>
+</ol>
+<p>流程就是这样，只不过每次都要这样写几步类似的代码，显得有点重复，需要在简化一下模板代码。</p>
+<ol>
+<li>首先对于输入数据部分。使用<code>ActivityResultCaller</code>申明支持注册（可以支持这么一个功能，所以它是一个接口）。提供了<code>registerForActivityResult()</code>来注册逻辑。<ul>
+<li>注册的内容”启动约定”和”结果回调”是委托给<code>ActivityResultRegistry</code>来实现。</li>
+<li>同时注册方法返回一个<code>ActivityResultLauncher</code>，这样注册就和启动产生了关联。</li>
+</ul>
+</li>
+<li>其次对于启动<code>Activity</code>部分。使用<code>ActivityResultLauncher</code>申明支持启动。调用方通过<code>launch()</code>方法来启动Activity，它会使用“启动约定”中的输入类型<code>I</code>来构造特定的<code>Intent</code>，组装数据外界就不用关心了。如何启动也不用关心了。</li>
+<li>最后再提供了一个工具类<code>ActivityResultRegistry</code>，来统一管理注册和处理结果逻辑。对于外界的调用而言，在启动Activity的时候，只关心输入什么数据<code>I</code>。以及在处理结果时，只关心最终的目标数据<code>O</code>就行。工作流程如下<ol>
+<li><code>register()</code>完成真实的注册逻辑。同时通过方法返回<code>ActivityResultLauncher</code>以便，调用来触发启动Activity的过程。</li>
+<li>处理结果数据。调用<code>ActivityResultContract.parseResult()</code>得到结果数据<code>O</code>。通过<code>ActivityResultCallback</code>回调显示数据。</li>
+</ol>
+</li>
+</ol>
+<p>这里预先定义了很多默认的<code>ActivityResultContract</code>实现者，来组装<code>Intent</code>数据，以及将结果数据转化为目标数据。当然也可以自定义。</p>
+<ul>
+<li>比如想要整个返回数据。可以使用<code>ActivityResultContracts.StartActivityForResult</code>。它定义如下：<code>public static final class StartActivityForResult extends ActivityResultContract&lt;Intent, ActivityResult&gt;</code>。输入一个Intent，获取整个返回结果。<code>ActivityResult</code>类保存了结果数据<code>resultCode</code>和<code>resultIntent</code>。</li>
+<li>启动相机拍照。<code>public static class TakePicture extends ActivityResultContract&lt;Uri, Boolean&gt;</code>。传入保存的文件地址，通过<code>Boolean</code>值判断成功与否。</li>
+</ul>
+<p>前面没有出现<code>requestCode</code>相关的逻辑，其实这一步不需要外部来参与了。在<code>ActivityResultRegistry</code>内部准备启动数据的时候就完成了。每次启动前先准备一个随机<code>int</code>值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">private int registerKey(String key) &#123;</span><br><span class="line">    Integer existing &#x3D; mKeyToRc.get(key);</span><br><span class="line">    if (existing !&#x3D; null) &#123;</span><br><span class="line">        return existing;</span><br><span class="line">    &#125;</span><br><span class="line">    int rc &#x3D; generateRandomNumber();</span><br><span class="line">    bindRcKey(rc, key);</span><br><span class="line">    return rc;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>还有一个是前面一直在注册信息，并没取消注册。如果不取消注册，可能会发生内存泄漏。其实这一步，也可以不让外部来参与。在<code>ActivityResultRegistry</code>中使用了Lifecycle相关逻辑。注册的时候，向LifecycleOwner添加了一个观察者。在页面销毁的时候，自动<code>unregister()</code>掉了注册的信息。妙。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">LifecycleEventObserver observer &#x3D; new LifecycleEventObserver() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onStateChanged(</span><br><span class="line">                    @NonNull LifecycleOwner lifecycleOwner,</span><br><span class="line">                    @NonNull Lifecycle.Event event) &#123;</span><br><span class="line">                if (Lifecycle.Event.ON_START.equals(event)) &#123;</span><br><span class="line">                    mKeyToCallback.put(key, new CallbackAndContract&lt;&gt;(callback, contract));</span><br><span class="line">                    if (mParsedPendingResults.containsKey(key)) &#123;</span><br><span class="line">                        @SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">                        final O parsedPendingResult &#x3D; (O) mParsedPendingResults.get(key);</span><br><span class="line">                        mParsedPendingResults.remove(key);</span><br><span class="line">                        callback.onActivityResult(parsedPendingResult);</span><br><span class="line">                    &#125;</span><br><span class="line">                    final ActivityResult pendingResult &#x3D; mPendingResults.getParcelable(key);</span><br><span class="line">                    if (pendingResult !&#x3D; null) &#123;</span><br><span class="line">                        mPendingResults.remove(key);</span><br><span class="line">                        callback.onActivityResult(contract.parseResult(</span><br><span class="line">                                pendingResult.getResultCode(),</span><br><span class="line">                                pendingResult.getData()));</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; else if (Lifecycle.Event.ON_STOP.equals(event)) &#123;</span><br><span class="line">                    mKeyToCallback.remove(key);</span><br><span class="line">                &#125; else if (Lifecycle.Event.ON_DESTROY.equals(event)) &#123;</span><br><span class="line">                    &#x2F;&#x2F;取消注册信息</span><br><span class="line">                    unregister(key);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        lifecycleContainer.addObserver(observer);</span><br></pre></td></tr></table></figure>
+<p>对应的在<code>ActivityResultRegistry</code>中还提供了一个没有<code>Lifecycle</code>的注册方法，这就需要在页面销毁的时候，手动取消注册。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public final &lt;I, O&gt; ActivityResultLauncher&lt;I&gt; register(</span><br><span class="line">            @NonNull final String key,</span><br><span class="line">            @NonNull final ActivityResultContract&lt;I, O&gt; contract,</span><br><span class="line">            @NonNull final ActivityResultCallback&lt;O&gt; callback)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在启动 activity 以获取结果时，可能会出现您的进程和 activity 因内存不足而被销毁的情况；如果是使用相机等内存密集型操作，几乎可以确定会出现这种情况。</p>
+</blockquote>
+<p><code>Result API</code>也处理了页面中途被销毁的情况。<code>ActivityResultRegistry</code>提供了<code>onSaveInstanceState()</code>和<code>onRestoreInstanceState()</code>，在<code>Activity</code>被销毁和复原时会调用响应的方法保存和恢复数据。</p>
+<p><code>ActivityResultRegistry</code>支持的功能有注册信息，分发结果数据，保存或恢复注册信息，启动Activity。虽然是一个综合的管家类，但是它通过抽象方法<code>public abstract &lt;I, O&gt; void onLaunch()</code>将如何启动<code>Activity</code>的逻辑暴露出去了，有实现者来完成（责任尽量少）。</p>
+
+                    </article>
+                    
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">This article was last updated on <span id="date-expire-num"></span> days ago, and the information described in the article may have changed.</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2021-08-14");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">Published at&nbsp;<time datetime="2021-08-14T04:09:17.000Z" itemprop="datePublished">2021-08-14</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+<span class="post-categories-list mt-2">
+
+<a class="post-categories-list-item" href='/categories/Android/'>Android</a>
+
+</span>
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/tags/Android-Jetpack/" rel="tag">#&nbsp;Android-Jetpack</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/2021/08/01/%E5%8A%A8%E6%80%81%E4%BF%AE%E6%94%B9Activity%E5%90%8D%E7%A7%B0/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">动态修改Activity名称</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://lysmbetter.top/2021/08/14/Activity-Result-API%E6%8E%A2%E7%A9%B6/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://lysmbetter.top/2021/08/14/Activity-Result-API%E6%8E%A2%E7%A9%B6/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+<script id="disqus-thread-script">
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document;
+        var s = d.createElement('script');
+        s.src = '//lysmbetter.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', + new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="http://lysmbetter.top">Better</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+    <!-- Busuanzi User Views -->
+    <span id="busuanzi_container_site_uv" hidden>
+        <span></span>
+        <span id="busuanzi_value_site_uv"></span>
+        <span>Viewers</span>
+        
+            <span>|</span>
+        
+    </span>
+
+
+
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+document.getElementById('copyright-year').textContent = new Date().getFullYear();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/lib/vanilla-lazyload/lazyload.min.js" async></script>
+    <script src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+<!-- Offset -->
+
+
+
+
+<!-- Comment -->
+
+    
+        <script id="dsq-count-scr" src="https://lysmbetter.disqus.com/count.js" async></script>
+
+    
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>
