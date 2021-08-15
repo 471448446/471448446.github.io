@@ -156,7 +156,7 @@
     <meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Better"><meta name="msapplication-starturl" content="http://lysmbetter.top"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Better"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <!-- ### The Open Graph & Twitter Card Protocol ### -->
-    <meta property="og:title" content="Activity Result API探究 | Better"><meta property="og:site_name" content="Better"><meta property="og:type" content="article"><meta property="og:url" content="http://lysmbetter.top/2021/08/14/Activity-Result-API%E6%8E%A2%E7%A9%B6/"><meta property="og:locale" content="zh-Hans"><meta name="description" content="官方文档：Activity Result API 使用版本：androidx.activity:activity:1.2.4 传统的启动Activity获取结果，步骤是怎样：  首先得定义启动得Intent数据 确定当前得启动环境，是在Activity还是在Fragment。因为Activity.startActivityForResult()和Fragment.startActivityForR - Better - Better"><meta name="keywords" content="Android-Jetpack, android"><meta property="article:published_time" content="2021-08-14T04:09:17.000Z"><meta property="article:modified_time" content="2021-08-14T04:16:50.468Z"><meta property="og:updated_time" content="2021-08-14T04:16:50.468Z"><meta property="article:author" content="Better"><meta property="article:tag" content="Android-Jetpack, android"><meta name="twitter:card" content="summary">
+    <meta property="og:title" content="Activity Result API探究 | Better"><meta property="og:site_name" content="Better"><meta property="og:type" content="article"><meta property="og:url" content="http://lysmbetter.top/2021/08/14/Activity-Result-API%E6%8E%A2%E7%A9%B6/"><meta property="og:locale" content="zh-Hans"><meta name="description" content="官方文档：Activity Result API 使用版本：androidx.activity:activity:1.2.4 传统的启动Activity获取结果，步骤是怎样：  首先得定义启动的Intent数据 确定当前的启动环境，是在Activity还是在Fragment。因为Activity.startActivityForResult()和Fragment.startActivityForR - Better - Better"><meta name="keywords" content="Android-Jetpack, android"><meta property="article:published_time" content="2021-08-14T04:09:17.000Z"><meta property="article:modified_time" content="2021-08-15T02:35:11.377Z"><meta property="og:updated_time" content="2021-08-15T02:35:11.377Z"><meta property="article:author" content="Better"><meta property="article:tag" content="Android-Jetpack, android"><meta name="twitter:card" content="summary">
 
     
 
@@ -197,7 +197,7 @@
     },
     
     "datePublished": "2021-08-14T04:09:17.000Z",
-    "dateModified": "2021-08-14T04:16:50.468Z",
+    "dateModified": "2021-08-15T02:35:11.377Z",
     "author": {
         "@type": "Person",
         "name": "Better",
@@ -223,7 +223,7 @@
     },
     
     "keywords": "Android-Jetpack, android",
-    "description": "官方文档：Activity Result API 使用版本：androidx.activity:activity:1.2.4 传统的启动Activity获取结果，步骤是怎样：  首先得定义启动得Intent数据 确定当前得启动环境，是在Activity还是在Fragment。因为Activity.startActivityForResult()和Fragment.startActivityForR - Better - Better"
+    "description": "官方文档：Activity Result API 使用版本：androidx.activity:activity:1.2.4 传统的启动Activity获取结果，步骤是怎样：  首先得定义启动的Intent数据 确定当前的启动环境，是在Activity还是在Fragment。因为Activity.startActivityForResult()和Fragment.startActivityForR - Better - Better"
 }
 </script>
 
@@ -352,17 +352,17 @@
 <p>使用版本：<code>androidx.activity:activity:1.2.4</code></p>
 <p>传统的启动<code>Activity</code>获取结果，步骤是怎样：</p>
 <ol>
-<li>首先得定义启动得<code>Intent</code>数据</li>
-<li>确定当前得启动环境，是在<code>Activity</code>还是在<code>Fragment</code>。因为<code>Activity.startActivityForResult()</code>和<code>Fragment.startActivityForResult()</code>决定了，结果数据是在<code>Activity</code>中还是在<code>Fragment</code>中处理</li>
+<li>首先得定义启动的<code>Intent</code>数据</li>
+<li>确定当前的启动环境，是在<code>Activity</code>还是在<code>Fragment</code>。因为<code>Activity.startActivityForResult()</code>和<code>Fragment.startActivityForResult()</code>决定了，结果数据是在<code>Activity</code>中还是在<code>Fragment</code>中处理</li>
 <li>启动<code>Activity.startActivityForResult()</code></li>
 <li>目标页面操作完成后，在<code>onActivityResult()</code>中处理数据</li>
 </ol>
-<p>传统的启动得方式，是有一些问题的</p>
+<p>传统的启动的方式，是有一些问题的</p>
 <ul>
 <li>需要定义变量区分每一个启动的返回结果，要么是<code>requestCode</code>，要么通过<code>resultCode</code>。</li>
 <li>得区分是启动环境，是在<code>Activity</code>，还是<code>Fragment</code>。</li>
-<li>同时得在<code>onActivityResult()</code>处来处理启动得结果，又是一堆switch。得通过<code>requestCode</code>判断是谁启动得。得通过<code>resultCode</code>判断结果是否成功。如果有返回值再通过<code>intent</code>来取数据。</li>
-<li>对于一些特定，已经固定的启动Activity方式，需要每次编写。比如启动相机拍照，在Intent中要传入，拍照图片的文件地址。格式是固定得，但是每次拍照，都要这么写，可能比较繁琐。当然这种定义一个全局的方法也行。不过如果换一个人实现这个功能，可能写法就又不一样了。</li>
+<li>同时得在<code>onActivityResult()</code>处来处理启动的结果，又是一堆switch。得通过<code>requestCode</code>判断是谁启动。得通过<code>resultCode</code>判断结果是否成功。如果有返回值再通过<code>intent</code>来取数据。</li>
+<li>对于一些特定，已经固定的启动Activity方式，需要每次编写。比如启动相机拍照，在Intent中要传入，拍照图片的文件地址。格式是固定的，但是每次拍照，都要这么写，可能比较繁琐。当然这种定义一个全局的方法也行。不过如果换一个人实现这个功能，可能写法就又不一样了。</li>
 </ul>
 <p>而新的<code>Activity Result API</code>方式，它只需提供一个<code>ActivityResultContract</code>来输入数据，以提供怎样启动<code>Activity</code>。并提供了回调<code>ActivityResultCallback</code>来接收最终想要数据`。这样的好处是</p>
 <ul>
@@ -380,7 +380,7 @@
 <p>下面从实现的效果，来反向理解它的设计<br><strong>目标：简化为注册一个回调来接收结果</strong></p>
 <p>首先要实现这个目标，得定义一个回调用来接收数据，对应的就是<code>ActivityResultCallback&lt;O&gt;</code>（结果回调），类型<code>O</code>就是最后期望得到的数据类型。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface ActivityResultCallback&lt;O&gt; &#123;</span><br><span class="line">    void onActivityResult(@SuppressLint(&quot;UnknownNullness&quot;) O result);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>然后得想办法支持自定义得输入类型。<br>启动一个Activity并获取它的结果过程，可看作是向一个Activity输入特定的数据，然后获取特定结果。当然启动Activity输入数据还是通过Intent来完成，回传数据也是通过<code>onActivityResult()</code>来完成，基本情况是不变的。<br>将这个过程抽象到具体的方法中。在<code>ActivityResultContract&lt;I, O&gt;</code>（启动约定），<code>I</code>是输入的数据类型，<code>O</code>是返回的结果类型。</p>
+<p>然后得想办法支持自定义的输入类型。<br>启动一个Activity并获取它的结果过程，可看作是向一个Activity输入特定的数据，然后获取特定结果。当然启动Activity输入数据还是通过Intent来完成，回传数据也是通过<code>onActivityResult()</code>来完成，基本情况是不变的。<br>将这个过程抽象到具体的方法中。在<code>ActivityResultContract&lt;I, O&gt;</code>（启动约定），<code>I</code>是输入的数据类型，<code>O</code>是返回的结果类型。</p>
 <ol>
 <li><code>ActivityResultContract.createIntent(Context context,I input)</code>是准备启动的<code>Intent</code>，用以表示输入的数据<code>I</code>。</li>
 <li><code>ActivityResultContract.parseResult(int resultCode,Intent intent)</code>是用来解析结果数据，用以表示希望获取的数据。根据结果数据转换为想要的结果数据类型<code>O</code>。</li>
@@ -436,7 +436,7 @@
     <blockquote id="date-expire-notification" class="post-expired-notify">This article was last updated on <span id="date-expire-num"></span> days ago, and the information described in the article may have changed.</blockquote>
     <script>
     (function() {
-        var dateUpdate = Date.parse("2021-08-14");
+        var dateUpdate = Date.parse("2021-08-15");
         var nowDate = new Date();
         var a = nowDate.getTime();
         var b = a - dateUpdate;
@@ -451,6 +451,8 @@
 
 
 <p class="post-footer-info mb-0 pt-0">Published at&nbsp;<time datetime="2021-08-14T04:09:17.000Z" itemprop="datePublished">2021-08-14</time>
+
+    , Updated at&nbsp;<time datetime="2021-08-15T02:35:11.377Z" itemprop="dateModified">2021-08-15</time>
 
 </p>
 <p class="post-footer-info mb-0 pt-2">
